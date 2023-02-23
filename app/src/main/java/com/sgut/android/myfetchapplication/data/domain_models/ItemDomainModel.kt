@@ -9,4 +9,14 @@ data class ItemDomainModel(
     var id: Int? = null,
     var listId: Int? = null,
     var name: String? = null,
+
 )
+
+fun ItemDomainModel.asItemFavoritesDomainModel(): FavoriteItem {
+    return FavoriteItem(
+        id = id,
+        listId = listId,
+        name = name,
+        favId = 0
+    )
+}

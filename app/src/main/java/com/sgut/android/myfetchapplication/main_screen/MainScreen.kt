@@ -1,19 +1,19 @@
 package com.sgut.android.myfetchapplication.main_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -21,9 +21,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-
 
 
 @Composable
@@ -33,10 +30,15 @@ fun MainScreen(
 ) {
    val uiState by mainScreenViewModel.mainScreenUiState.collectAsState()
 
-    ItemsList(
-        uiState = uiState,
-        navController = navController
-    )
+    Column(modifier = Modifier.padding(16.dp)) {
+        ItemsList(
+            uiState = uiState,
+            navController = navController,
+            mainScreenViewModel = mainScreenViewModel
+        )
+    }
+
+
 
 
 }
@@ -46,7 +48,8 @@ fun MainScreen(
 fun ItemCard(
     item: ItemDomainModel,
     modifier: Modifier,
-    navController: NavController
+    navController: NavController,
+    mainScreenViewModel: MainScreenViewModel
     ) {
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -79,6 +82,17 @@ fun ItemCard(
               color = Color.Black,
               fontSize = 12.sp
           )
+
+          Button(onClick = {
+              mainScreenViewModel.onAddToFavoritesClick(item)
+
+          }) {
+              Text(
+                  text = "Add to favorites",
+                  fontSize = 10.sp
+              )
+          }
+          
       }
 
     }
@@ -89,14 +103,17 @@ fun ItemCard(
 @Composable
 fun ItemsList(
     uiState: MainScreenUiState,
-    navController: NavController
+    navController: NavController,
+    mainScreenViewModel: MainScreenViewModel
 ) {
     LazyColumn {
         items(items = uiState.currentItems) { item ->
             Row(modifier = Modifier.animateItemPlacement()) {
                 ItemCard(
                     item = item, modifier = Modifier.padding(8.dp),
-                    navController = navController
+                    navController = navController,
+                    mainScreenViewModel = mainScreenViewModel
+
                 )
             }
         }

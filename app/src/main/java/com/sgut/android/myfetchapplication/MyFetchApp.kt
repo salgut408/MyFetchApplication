@@ -39,7 +39,7 @@ fun MyFetchApp(
         },
         bottomBar = {
             BottomAppBar(modifier = Modifier) {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {appState.navController.navigate(NavigationScreens.Favorites.route)}) {
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = null
@@ -50,13 +50,9 @@ fun MyFetchApp(
     ) { innerPadding ->
         Navigation(
             appState = appState,
+            padding = innerPadding
         )
-
     }
-
-
-
-
 }
 @Composable
 fun rememberAppState(

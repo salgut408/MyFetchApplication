@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
 import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.data.repository.ItemRepository
 import com.sgut.android.myfetchapplication.utils.ItemComparator
@@ -30,6 +31,10 @@ class MainScreenViewModel @Inject constructor(
 
     }
 
+
+    fun onAddToFavoritesClick(item: ItemDomainModel) = viewModelScope.launch {
+        itemRepository.saveFavoriteItem(item)
+    }
 
     private fun loadItems() = viewModelScope.launch {
         try {

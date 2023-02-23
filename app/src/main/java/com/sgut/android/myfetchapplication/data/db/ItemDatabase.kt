@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
 import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
 
 @Database(
-    entities = [ItemDomainModel::class],
-    version = 1,
+    entities = [ItemDomainModel::class, FavoriteItem::class],
+    version = 2,
     exportSchema = false
 )
 abstract class ItemDatabase : RoomDatabase() {
@@ -28,6 +29,7 @@ abstract class ItemDatabase : RoomDatabase() {
                 context.applicationContext,
                 ItemDatabase::class.java,
                 "item_db.db"
-            ).build()
+            ).fallbackToDestructiveMigration()
+                .build()
     }
 }

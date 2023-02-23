@@ -34,17 +34,20 @@ object AppModule {
             context,
             ItemDatabase::class.java,
             "database"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun provideItemRepository(
         networkItemDtoMapperImpl: NetworkItemDtoMapperImpl,
         dao: ItemDao,
         api: FetchApi,
+        itemDatabase: ItemDatabase
     ): ItemRepository = ItemRepository(
         networkItemDtoMapperImpl,
         dao,
-        api
+        api,
+        itemDatabase
     )
 
     @Singleton
