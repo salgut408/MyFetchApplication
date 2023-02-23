@@ -3,7 +3,6 @@ package com.sgut.android.myfetchapplication.data.db
 import androidx.room.*
 import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
 import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
-import retrofit2.http.DELETE
 
 @Dao
 interface ItemDao {

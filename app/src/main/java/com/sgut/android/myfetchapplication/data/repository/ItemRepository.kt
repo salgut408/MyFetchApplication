@@ -31,20 +31,22 @@ class ItemRepository @Inject constructor(
         return result
     }
 
+    //repository is central place for all data changes
 
     suspend fun saveFavoriteItem(item: ItemDomainModel){
         itemDatabase.getDao().insertFavoriteItem(item.asItemFavoritesDomainModel())
     }
 
+    suspend fun deleteFavorteItem(item: ItemDomainModel) {
+        itemDatabase.getDao().delete(item.asItemFavoritesDomainModel())
+    }
+
     suspend fun getInfoForDatabase() {
         withContext(Dispatchers.IO) {
             try {
-                val items = api.getFetchInformation().body()!!
-                val items2 = networkItemDtoMapperImpl.toDomainList(items)
-
-                items2.map{dao.update(it)}
-
-
+                val items = api.getFetchInformation().body()
+                    ?.let { networkItemDtoMapperImpl.toDomainList(it) }
+                items?.map{dao.update(it)}
             } catch (err: Exception) {
                 Log.i("Tag", "Failed")
             }

@@ -31,6 +31,9 @@ class MainScreenViewModel @Inject constructor(
 
     }
 
+    fun onRemovefromFavoritesClick(item: ItemDomainModel) = viewModelScope.launch {
+        itemRepository.deleteFavorteItem(item)
+    }
 
     fun onAddToFavoritesClick(item: ItemDomainModel) = viewModelScope.launch {
         itemRepository.saveFavoriteItem(item)
