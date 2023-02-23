@@ -26,7 +26,6 @@ import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
 
 @Composable
 fun FavoitesScreen(
-    navController: NavController,
     favoritesScreenViewModel: FavoritesScreenViewModel = hiltViewModel(),
 ) {
     val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState()
@@ -45,10 +44,9 @@ fun FavoriteItemCard(
     Card(
         shape = RoundedCornerShape(10.dp),
         elevation = 4.dp,
-        backgroundColor = Color.LightGray,
+        backgroundColor = Color.Yellow,
         modifier = modifier
             .fillMaxWidth()
-            .clickable { }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -65,13 +63,13 @@ fun FavoriteItemCard(
             Text(
                 text = item.id.toString(),
                 color = Color.Black,
-                fontSize = 12.sp
+                fontSize = 20.sp
             )
 
             Text(
                 text = item.listId.toString(),
                 color = Color.Black,
-                fontSize = 12.sp
+                fontSize = 20.sp
             )
 
 

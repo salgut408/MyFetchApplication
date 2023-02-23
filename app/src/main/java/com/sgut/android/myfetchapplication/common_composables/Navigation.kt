@@ -31,9 +31,7 @@ fun Navigation(
         composable(
             route = NavigationScreens.Favorites.route
         ) {
-            FavoitesScreen(
-                navController = appState.navController
-            )
+            FavoitesScreen()
         }
     }
 
