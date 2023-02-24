@@ -90,8 +90,9 @@ fun ItemCard(
          SaveItemButton(
              onClick = {
                  if(isPressed) {
+//                     TODO this is not removing from database says saved 4 now
                      mainScreenViewModel.onRemovefromFavoritesClick(item)
-                     Toast.makeText(context, AppText.remove, Toast.LENGTH_SHORT).show()
+                     Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()
                  } else {
                      mainScreenViewModel.onAddToFavoritesClick(item)
                      Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()

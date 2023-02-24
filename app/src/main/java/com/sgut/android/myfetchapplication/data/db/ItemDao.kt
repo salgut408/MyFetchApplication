@@ -18,16 +18,18 @@ interface ItemDao {
     suspend fun getInfoFromDbSortByListIdExNullsExBlanks(): List<ItemDomainModel>
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFavoriteItem(item: FavoriteItem)
 
     @Query("SELECT * FROM favorite_item_table")
     suspend fun getAllFavoriteItems(): List<FavoriteItem>
 
     @Query("DELETE FROM favorite_item_table")
-    suspend fun deleteFavoriteItemTable();
+    suspend fun deleteFavoriteItemTable()
 
     @Delete
     suspend fun delete(item: FavoriteItem)
+
+
 
 }

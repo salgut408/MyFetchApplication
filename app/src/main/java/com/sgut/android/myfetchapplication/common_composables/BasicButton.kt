@@ -22,11 +22,6 @@ fun BasicButton(
     Button(
         onClick = action,
         modifier = modifier,
-        colors =
-        ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.primary,
-            contentColor = MaterialTheme.colors.onPrimary
-        )
     ) {
         Text(text = stringResource(text), fontSize = 16.sp)
     }

@@ -55,6 +55,8 @@ class ItemRepository @Inject constructor(
         itemDatabase.getDao().delete(item.asItemFavoritesDomainModel())
     }
 
+
+
     override suspend fun clearTable() {
         itemDatabase.getDao().deleteFavoriteItemTable()
     }
