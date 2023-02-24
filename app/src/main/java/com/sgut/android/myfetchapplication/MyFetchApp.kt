@@ -39,7 +39,12 @@ fun MyFetchApp(
         },
         bottomBar = {
             BottomAppBar(modifier = Modifier) {
-                IconButton(onClick = {appState.navController.navigate(NavigationScreens.Favorites.route)}) {
+                IconButton(onClick = {
+                    appState.navController.navigate(NavigationScreens.Favorites.route) {
+                    // this makes only one screen even if clicked multiple times so theyre not added to back stack
+                        this.launchSingleTop = true
+                    }
+                }) {
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = null

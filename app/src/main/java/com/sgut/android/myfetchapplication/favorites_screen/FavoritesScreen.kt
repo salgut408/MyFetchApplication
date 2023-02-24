@@ -38,7 +38,7 @@ fun FavoitesScreen(
         BasicButton(
             text = AppText.clear_db,
             modifier = Modifier.textButton(),
-            action = {}
+            action = { favoritesScreenViewModel.onClearListClick() }
         )
 
         FavoriteItemsList(

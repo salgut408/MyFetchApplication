@@ -24,24 +24,26 @@ class ItemRepository @Inject constructor(
     val itemDatabase: ItemDatabase
 ): ItemsRepositoryInterface {
 
+    //this gets sorted list from sql in db
     override suspend fun getSortedListExNullsExBlanksFromRepository(): List<ItemDomainModel> {
         val result = dao.getInfoFromDbSortByListIdExNullsExBlanks()
         return result
     }
 
-    // using kotlin opertators
-
+// this gets all info, not sorted
     override  suspend fun getAllInfoFromRepository(): List<ItemDomainModel> {
         val result = dao.getAllInfoFromDb()
         return result
 
     }
 
-
+//this gets all favorites
     override suspend fun getFavorites(): List<FavoriteItem> {
         val result = dao.getAllFavoriteItems()
         return result
     }
+
+
 
     //repository is central place for all data changes
 
@@ -51,6 +53,10 @@ class ItemRepository @Inject constructor(
 
     override suspend fun deleteFavorteItem(item: ItemDomainModel) {
         itemDatabase.getDao().delete(item.asItemFavoritesDomainModel())
+    }
+
+    override suspend fun clearTable() {
+        itemDatabase.getDao().deleteFavoriteItemTable()
     }
 
     //calls for all infor for databaase no sort

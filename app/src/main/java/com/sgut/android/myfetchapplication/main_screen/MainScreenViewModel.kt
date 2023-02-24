@@ -58,7 +58,7 @@ class MainScreenViewModel @Inject constructor(
         }
     }
 
-
+// this makes initial api call
     private fun callInfoForDB() = viewModelScope.launch {
         itemRepository.getInfoForDatabaseNoSort()
     }

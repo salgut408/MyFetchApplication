@@ -11,4 +11,6 @@ interface ItemsRepositoryInterface {
     suspend fun saveFavoriteItem(item: ItemDomainModel)
     suspend fun deleteFavorteItem(item: ItemDomainModel)
     suspend fun getInfoForDatabaseNoSort(): Unit
+    suspend fun clearTable(): Unit
+
 }

@@ -3,7 +3,6 @@ package com.sgut.android.myfetchapplication.favorites_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sgut.android.myfetchapplication.data.repository.ItemRepository
-import com.sgut.android.myfetchapplication.main_screen.MainScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,6 +23,17 @@ class FavoritesScreenViewModel @Inject constructor(
 
     init {
         showFavoriteItems()
+    }
+
+
+    fun onClearListClick() = viewModelScope.launch {
+        itemRepository.clearTable()
+        _FavoritesScreenUiState.update { currentState ->
+            currentState.copy(
+                favoriteItems = listOf()
+            )
+        }
+
     }
 
     private fun showFavoriteItems() = viewModelScope.launch {
