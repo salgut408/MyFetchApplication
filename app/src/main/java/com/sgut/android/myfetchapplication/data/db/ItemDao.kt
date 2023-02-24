@@ -9,20 +9,23 @@ interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: ItemDomainModel): Long
 
-    @Query("SELECT * FROM item_table ORDER BY listId ASC")
-    suspend fun getInfoSortByListId(): List<ItemDomainModel>
+    //this returns unsorted list from db
+    @Query("SELECT * FROM item_table")
+    suspend fun getAllInfoFromDb(): List<ItemDomainModel>
 
-    @Query("SELECT * FROM item_table WHERE name IS NOT NULL ORDER BY listId ASC ")
-    suspend fun getInfoSortByListIdExNulls(): List<ItemDomainModel>
-
+    //this returns a sorted list from db
     @Query("SELECT * FROM item_table WHERE NULLIF(name, '') IS NOT NULL ORDER BY listId ASC ")
-    suspend fun getInfoSortByListIdExNullsExBlanks(): List<ItemDomainModel>
+    suspend fun getInfoFromDbSortByListIdExNullsExBlanks(): List<ItemDomainModel>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteItem(item: FavoriteItem)
 
     @Query("SELECT * FROM favorite_item_table")
     suspend fun getAllFavoriteItems(): List<FavoriteItem>
+
+    @Query("DELETE FROM favorite_item_table")
+    suspend fun deleteFavoriteItemTable();
 
     @Delete
     suspend fun delete(item: FavoriteItem)

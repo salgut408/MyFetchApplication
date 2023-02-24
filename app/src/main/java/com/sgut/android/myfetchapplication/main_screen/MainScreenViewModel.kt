@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
 import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.data.repository.ItemRepository
 import com.sgut.android.myfetchapplication.utils.ItemComparator
@@ -24,10 +23,14 @@ class MainScreenViewModel @Inject constructor(
     private val _MainScreenUiState = MutableStateFlow(MainScreenUiState())
     val mainScreenUiState: StateFlow<MainScreenUiState> = _MainScreenUiState.asStateFlow()
 
-    private var itemsList = mutableStateOf<List<ItemDomainModel>>(listOf())
-
     init {
-        getInforForDb()
+//        these do the same thing info is sorted in DB for one and in VM for the other call callInfoForDB() does initial call
+
+        callInfoForDB()
+
+//        showInfoFromRepositorySorted()
+
+        showAllItemsSortAndFilteredInVm()
 
     }
 
@@ -39,12 +42,15 @@ class MainScreenViewModel @Inject constructor(
         itemRepository.saveFavoriteItem(item)
     }
 
-    private fun loadItems() = viewModelScope.launch {
+
+    // this is supposed to sort with comparator in the Viewmodel
+
+    private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
         try {
-            val result = itemRepository.getSortedListExNullsExBlanks()
+            val result = itemRepository.getAllInfoFromRepository()
             _MainScreenUiState.update { currentState ->
                 currentState.copy(
-                    currentItems = result
+                    currentItems = result.sortedWith(ItemComparator).filter { it.name?.isNotEmpty() ?: false }
                 )
             }
         } catch (e: Exception) {
@@ -52,13 +58,23 @@ class MainScreenViewModel @Inject constructor(
         }
     }
 
-   private fun getInforForDb() = viewModelScope.launch {
-        itemRepository.getInfoForDatabase()
-        val result = itemRepository.getSortedListExNullsExBlanks()
-        _MainScreenUiState.update { currentState ->
-            currentState.copy(
-                currentItems = result.sortedWith(ItemComparator)
-            )
-        }
+
+    private fun callInfoForDB() = viewModelScope.launch {
+        itemRepository.getInfoForDatabaseNoSort()
+    }
+
+// this calls pre sorted info from repository/database
+   private fun showInfoFromRepositorySorted() = viewModelScope.launch {
+       try {
+
+           val result = itemRepository.getSortedListExNullsExBlanksFromRepository()
+           _MainScreenUiState.update { currentState ->
+               currentState.copy(
+                   currentItems = result
+               )
+           }
+       } catch (e: Exception) {
+           Log.e("Error", e.message.toString())
+       }
     }
 }

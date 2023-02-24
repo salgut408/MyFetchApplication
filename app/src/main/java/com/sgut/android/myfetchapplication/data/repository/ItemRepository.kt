@@ -8,40 +8,53 @@ import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.data.domain_models.asItemFavoritesDomainModel
 import com.sgut.android.myfetchapplication.data.dto_mappers.NetworkItemDtoMapperImpl
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
+import com.sgut.android.myfetchapplication.utils.ItemComparator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+//ItemRepository Implementation
+
 class ItemRepository @Inject constructor(
     val networkItemDtoMapperImpl: NetworkItemDtoMapperImpl,
     val dao: ItemDao,
     val api: FetchApi,
     val itemDatabase: ItemDatabase
-) {
+): ItemsRepositoryInterface {
 
-    suspend fun getSortedListExNullsExBlanks(): List<ItemDomainModel> {
-        val result = dao.getInfoSortByListIdExNullsExBlanks()
+    override suspend fun getSortedListExNullsExBlanksFromRepository(): List<ItemDomainModel> {
+        val result = dao.getInfoFromDbSortByListIdExNullsExBlanks()
         return result
     }
 
-    suspend fun getFavorites(): List<FavoriteItem> {
+    // using kotlin opertators
+
+    override  suspend fun getAllInfoFromRepository(): List<ItemDomainModel> {
+        val result = dao.getAllInfoFromDb()
+        return result
+
+    }
+
+
+    override suspend fun getFavorites(): List<FavoriteItem> {
         val result = dao.getAllFavoriteItems()
         return result
     }
 
     //repository is central place for all data changes
 
-    suspend fun saveFavoriteItem(item: ItemDomainModel){
+    override  suspend fun saveFavoriteItem(item: ItemDomainModel){
         itemDatabase.getDao().insertFavoriteItem(item.asItemFavoritesDomainModel())
     }
 
-    suspend fun deleteFavorteItem(item: ItemDomainModel) {
+    override suspend fun deleteFavorteItem(item: ItemDomainModel) {
         itemDatabase.getDao().delete(item.asItemFavoritesDomainModel())
     }
 
-    suspend fun getInfoForDatabase() {
+    //calls for all infor for databaase no sort
+    override suspend fun getInfoForDatabaseNoSort() {
         withContext(Dispatchers.IO) {
             try {
                 val items = api.getFetchInformation().body()
