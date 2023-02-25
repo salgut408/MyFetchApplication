@@ -18,7 +18,7 @@ interface ItemDao {
     suspend fun getInfoFromDbSortByListIdExNullsExBlanks(): List<ItemDomainModel>
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteItem(item: FavoriteItem)
 
     @Query("SELECT * FROM favorite_item_table")
