@@ -18,6 +18,5 @@ fun ItemDomainModel.asItemFavoritesDomainModel(): FavoriteItem {
         id = id,
         listId = listId,
         name = name,
-        favId = 0
     )
 }

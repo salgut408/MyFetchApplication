@@ -7,7 +7,7 @@ import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
 
 @Database(
     entities = [ItemDomainModel::class, FavoriteItem::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class ItemDatabase : RoomDatabase() {
