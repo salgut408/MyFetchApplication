@@ -9,8 +9,6 @@ data class ItemDomainModel(
     val id: Int? = null,
     val listId: Int? = null,
     val name: String? = null,
-
-
 )
 
 fun ItemDomainModel.asItemFavoritesDomainModel(): FavoriteItem {

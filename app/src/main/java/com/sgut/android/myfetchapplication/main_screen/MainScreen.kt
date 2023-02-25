@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -62,7 +63,7 @@ fun ItemCard(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        var isPressed by remember { mutableStateOf(false) }
+        var isPressed by rememberSaveable { mutableStateOf(false) }
         val context = LocalContext.current
       Row(
           verticalAlignment = Alignment.CenterVertically,
