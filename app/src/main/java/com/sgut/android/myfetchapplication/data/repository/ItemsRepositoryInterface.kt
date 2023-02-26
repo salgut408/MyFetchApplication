@@ -1,7 +1,7 @@
 package com.sgut.android.myfetchapplication.data.repository
 
-import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
-import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.data.db.FavoriteItem
+import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 
 interface ItemsRepositoryInterface {
 

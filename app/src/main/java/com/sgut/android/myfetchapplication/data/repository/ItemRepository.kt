@@ -3,15 +3,12 @@ package com.sgut.android.myfetchapplication.data.repository
 import android.util.Log
 import com.sgut.android.myfetchapplication.data.db.ItemDao
 import com.sgut.android.myfetchapplication.data.db.ItemDatabase
-import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
-import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.data.domain_models.asItemFavoritesDomainModel
+import com.sgut.android.myfetchapplication.data.db.FavoriteItem
+import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain_models.asItemFavoritesDomainModel
 import com.sgut.android.myfetchapplication.data.dto_mappers.NetworkItemDtoMapperImpl
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
-import com.sgut.android.myfetchapplication.utils.ItemComparator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

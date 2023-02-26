@@ -1,13 +1,10 @@
 package com.sgut.android.myfetchapplication.favorites_screen
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,10 +17,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.sgut.android.myfetchapplication.common_composables.BasicButton
 import com.sgut.android.myfetchapplication.common_composables.textButton
-import com.sgut.android.myfetchapplication.data.domain_models.FavoriteItem
+import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 import com.sgut.android.myfetchapplication.R.string as AppText
 
 

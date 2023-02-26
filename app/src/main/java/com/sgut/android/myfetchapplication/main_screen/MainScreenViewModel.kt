@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.data.repository.ItemRepository
 import com.sgut.android.myfetchapplication.utils.ItemComparator
 import dagger.hilt.android.lifecycle.HiltViewModel

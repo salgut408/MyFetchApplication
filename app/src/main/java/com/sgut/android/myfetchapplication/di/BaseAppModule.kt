@@ -1,8 +1,8 @@
-package com.sgut.android.myfetchapplication
+package com.sgut.android.myfetchapplication.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class BaseApp: Application() {
+class BaseAppModule: Application() {
 }

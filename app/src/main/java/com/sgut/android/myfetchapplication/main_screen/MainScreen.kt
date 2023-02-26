@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.R.string as AppText
 
 
@@ -68,7 +68,6 @@ fun ItemCard(
       Row(
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.SpaceEvenly,
-          modifier = Modifier.fillMaxWidth()
       ) {
           Text(
               text = item.name ?: "",

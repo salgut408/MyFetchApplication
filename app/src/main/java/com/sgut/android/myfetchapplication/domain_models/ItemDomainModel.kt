@@ -1,7 +1,8 @@
-package com.sgut.android.myfetchapplication.data.domain_models
+package com.sgut.android.myfetchapplication.domain_models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 
 @Entity(tableName = "item_table")
 data class ItemDomainModel(

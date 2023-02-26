@@ -1,6 +1,6 @@
 package com.sgut.android.myfetchapplication.data.dto_mappers
 
-import com.sgut.android.myfetchapplication.data.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.data.remote.network_responses.NetworkItem
 
 class NetworkItemDtoMapperImpl : DomainMapperInterface<NetworkItem, ItemDomainModel>{
