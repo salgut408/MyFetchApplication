@@ -1,4 +1,4 @@
-## MyFetchApplication
+# MyFetchApplication
 
 - 100% Kotlin & UI written in Jetpack Compose 
 - Dependacy Injections with Hilt 
@@ -10,7 +10,7 @@
 - MVVM Architecture
 - Coroutines
 
-## Features
+### Features
 This app shows a sorted list of items retrieved from an API using Retrofit. You are able to add an item to your favorites list and view a list of all items you have saved by tapping the "favorites" icon in the bottom toolbar.
 
 Each UI 'screen' has its own ViewModel, which exposes a single StateFlow containing the entire view state. 
@@ -19,7 +19,7 @@ Each ViewModel is responsible for subscribing to any data streams required for t
 This pattern is used across the different screens: The ViewModel is implemented as `MainScreenViewModel`, which exposes a `StateFlow` for the UI to observe and react to. `MainScreenUiState` contains the complete view state for the screen as a data class. 
 The UI uses `MainScreenViewModel`, and observes it's `MainScreenViewState` as Compose State, using `collectAsStateWithLifecycle()`
 
-# Saved state across configuration changes
+### Saved state across configuration changes
 - ViewModels are used to save state across any configuration changes.
 - Certain composable states are saved across configurations changes using `rememberSaveable` in the `SaveItemButton`
 
@@ -34,7 +34,7 @@ is the app's `Navigation()` composable where the app's NavHost is defined. `MyFe
 
 
 
-## Screens
+### Screens
 This app contains 2 screens:
 - __MainScreen__ is where a sorted list of Items is displayed. You can click to add an item to a "Favorites list" which is stored to a FavoriteItems table in Room. The `SaveItemButton` will change to show you you have added the item to your favorites list by changing 
 
