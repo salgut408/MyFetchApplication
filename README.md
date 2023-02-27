@@ -8,6 +8,7 @@
 - ViewModels
 - Retrofit
 - MVVM Architecture
+- Coroutines
 
 ## Features
 This app shows a sorted list of items retrieved from an API using Retrofit. You are able to add an item to your favorites list and view a list of all items you have saved by tapping the "favorites" icon in the bottom toolbar.
