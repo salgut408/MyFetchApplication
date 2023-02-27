@@ -38,7 +38,7 @@ is the app's `Navigation()` composable where the app's NavHost is defined. `MyFe
 This app contains 2 screens:
 - __MainScreen__ is where a sorted list of Items is displayed. You can click to add an item to a "Favorites list" which is stored to a FavoriteItems table in Room. The `SaveItemButton` will change to show you you have added the item to your favorites list by changing 
 
--__FavoritesScreen__ is where a list of favorited items is displayed. 
+- __FavoritesScreen__ is where a list of favorited items is displayed. 
 
 
 
