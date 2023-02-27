@@ -20,20 +20,17 @@ A ViewModel is implemented as `MainScreenViewModel`, exposing a `StateFlow<MainS
 `MainScreenUiState` contains the view state data for the screen as a data class consisting of a list...
 The UI uses `MainScreenViewModel`, and observes the `MainScreenViewState` as Compose State, using `collectAsStateWithLifecycle()`
 
+The ItemRepository class is responsible for handling the data fetching of all information, as well as a centralized place for all data changes*
+
+
 ### Saved state across configuration changes
 - ViewModels are used to save state across any configuration changes.
 - Certain composable states are saved across configurations changes using `rememberSaveable` in the `SaveItemButton`
 
-
-The Repository class is responsible for handling the data fetching of all information, as well as a centralized place for all data changes*
-
+### Navigation
 Single activity app, `MainActivity` contains `MyFetchApp()` composable which is entrypoint to the app. 
 `MyFetchApp()` sets up a layout at the app level using  `Scaffold` consisting to a scrolling top app bar and a bottom bar. The content in this `Scaffold`
 is the app's `Navigation()` composable where the app's NavHost is defined. `MyFetchAppState` holds the actual NavHostController for all of the app.
-
-
-
-
 
 ### Screens
 This app contains 2 screens:
