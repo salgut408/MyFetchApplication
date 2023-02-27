@@ -22,6 +22,13 @@ The UI uses `MainScreenViewModel`, and observes the `MainScreenViewState` as Com
 
 The ItemRepository class is responsible for handling the data fetching of all information, as well as a centralized place for all data changes*
 
+### Sorting and filter
+Different strategies used for sorting and filtering the information displayed within the app
+
+-__ViewModel__ the `ItemDao` returns a UNSORTED list with the suspend function `getAllInfoFromDb`, this function is then called in the `ItemRepository` function `getAllInfromFromRepository` the list is finally sorted by the `MainScreenViewModel using the helper class `ItemComparator`. This follows the thought that all ui data that will be displayed by the ui will be managed by the ViewModel.
+
+-__Database__ the `ItemDao` returns a sorted list with the suspend function `getSortedListExNullsExBlanksFromRepository` this uses a query to sort and filter out items in the list.
+
 
 ### Saved state across configuration changes
 - ViewModels are used to save state across any configuration changes.
