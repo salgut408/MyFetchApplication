@@ -16,7 +16,8 @@ This app shows a sorted list of items retrieved from an API using Retrofit. You 
 Each UI 'screen' has its own ViewModel, and exposes a single StateFlow containing the entire view state for the screen. 
 The ViewModel is responsible for subscribing to  data streams  for a view, and exposes functions to allow the UI to react to UI events.
 
-A ViewModel is implemented as `MainScreenViewModel`, exposing a `StateFlow` for the UI to observe and react to. `MainScreenUiState` contains the view state for the screen as a data class... 
+A ViewModel is implemented as `MainScreenViewModel`, exposing a `StateFlow<MainScreenUiState>` for the UI to observe and react to. 
+`MainScreenUiState` contains the view state data for the screen as a data class consisting of a list...
 The UI uses `MainScreenViewModel`, and observes the `MainScreenViewState` as Compose State, using `collectAsStateWithLifecycle()`
 
 ### Saved state across configuration changes
