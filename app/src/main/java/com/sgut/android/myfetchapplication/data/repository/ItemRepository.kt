@@ -1,5 +1,6 @@
 package com.sgut.android.myfetchapplication.data.repository
 
+import android.icu.text.LocaleDisplayNames.UiListItem
 import android.util.Log
 import com.sgut.android.myfetchapplication.data.db.ItemDao
 import com.sgut.android.myfetchapplication.data.db.ItemDatabase
@@ -9,6 +10,8 @@ import com.sgut.android.myfetchapplication.domain.domain_models.asItemFavoritesD
 import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
 import com.sgut.android.myfetchapplication.domain.ItemsRepositoryInterface
+import com.sgut.android.myfetchapplication.domain.domain_models.asItemUiModel
+import com.sgut.android.myfetchapplication.ui.screens.ItemUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

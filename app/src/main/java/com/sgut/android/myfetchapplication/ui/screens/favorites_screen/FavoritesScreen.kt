@@ -26,18 +26,10 @@ fun FavoitesScreen(
 ) {
     val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState()
 
-    Column() {
-
-
-
         FavoriteItemsList(
             uiState = favoritesScreenUiState,
         )
-    }
-
-
 }
-
 
 @Composable
 fun FavoriteItemCard(
@@ -74,9 +66,6 @@ fun FavoriteItemCard(
                 color = Color.Black,
                 fontSize = 20.sp
             )
-
-
-
         }
 
     }
@@ -88,9 +77,6 @@ fun FavoriteItemCard(
 fun FavoriteItemsList(
     uiState: FavoritesScreenUiState,
 ) {
-
-   
-
     LazyColumn {
         items(items = uiState.favoriteItems) { item ->
             Row(modifier = Modifier.animateItemPlacement()) {

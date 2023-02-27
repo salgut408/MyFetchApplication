@@ -26,6 +26,7 @@ fun ItemDomainModel.asItemUiModel(): ItemUiModel {
     return ItemUiModel(
         id = id,
         listId = listId,
-        name = name,
+        name = name
     )
 }
+
