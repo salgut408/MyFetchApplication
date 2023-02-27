@@ -1,9 +1,8 @@
-package com.sgut.android.myfetchapplication.main_screen
+package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,12 +11,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -32,21 +29,31 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 
 @Composable
 fun MainScreen(
-    navController: NavController,
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
 ) {
    val uiState by mainScreenViewModel.mainScreenUiState.collectAsState()
 
-    Column(modifier = Modifier.padding(16.dp)) {
-        ItemsList(
-            uiState = uiState,
-            mainScreenViewModel = mainScreenViewModel
-        )
-    }
 
+    MainScreenContent(
+        modifier = Modifier,
+        mainScreenViewModel = mainScreenViewModel,
+        uiState = uiState
+    )
 
+}
 
-
+@Composable
+fun MainScreenContent(
+    modifier: Modifier,
+    mainScreenViewModel: MainScreenViewModel,
+    uiState: MainScreenUiState
+) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            ItemsList(
+                uiState = uiState,
+                mainScreenViewModel = mainScreenViewModel
+            )
+        }
 }
 
 
@@ -87,25 +94,21 @@ fun ItemCard(
               color = Color.Black,
               fontSize = 12.sp
           )
-         SaveItemButton(
-             onClick = {
-                 if(isPressed) {
-//                     TODO this is not removing from database says saved 4 now
-                     mainScreenViewModel.onRemovefromFavoritesClick(item)
-                     Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()
-                 } else {
-                     mainScreenViewModel.onAddToFavoritesClick(item)
-                     Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()
-                 }
-                 when (isPressed) {
-                     true -> isPressed = false
-                     false -> isPressed = true
-                 }
-                       },
-             text = { Text(if (isPressed) stringResource(AppText.saved) else stringResource(AppText.add_to_favorites)) },
-             icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
-             isPressed = isPressed
-         )
+          SaveItemButton(
+              onClick = {
+                  if (isPressed) {
+                      mainScreenViewModel.onRemovefromFavoritesClick(item)
+                      Toast.makeText(context, AppText.removed, Toast.LENGTH_SHORT).show()
+                  } else {
+                      mainScreenViewModel.onAddToFavoritesClick(item)
+                      Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()
+                  }
+                  isPressed = !isPressed
+              },
+              text = { Text(if (isPressed) stringResource(AppText.saved) else stringResource(AppText.add_to_favorites)) },
+              icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
+              isPressed = isPressed
+          )
           
       }
 

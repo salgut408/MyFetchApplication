@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.favorites_screen
+package com.sgut.android.myfetchapplication.ui.screens.favorites_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,15 +26,7 @@ class FavoritesScreenViewModel @Inject constructor(
     }
 
 
-    fun onClearListClick() = viewModelScope.launch {
-        itemRepository.clearTable()
-        _FavoritesScreenUiState.update { currentState ->
-            currentState.copy(
-                favoriteItems = listOf()
-            )
-        }
 
-    }
 
     private fun showFavoriteItems() = viewModelScope.launch {
         val result = itemRepository.getFavorites()

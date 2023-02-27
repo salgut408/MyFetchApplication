@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.main_screen
+package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf

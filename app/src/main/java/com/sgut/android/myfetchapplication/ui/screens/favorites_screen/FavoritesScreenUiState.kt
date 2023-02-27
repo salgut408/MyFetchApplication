@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.favorites_screen
+package com.sgut.android.myfetchapplication.ui.screens.favorites_screen
 
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 

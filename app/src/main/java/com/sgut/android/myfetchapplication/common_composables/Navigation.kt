@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sgut.android.myfetchapplication.MyFetchAppState
-import com.sgut.android.myfetchapplication.favorites_screen.FavoitesScreen
-import com.sgut.android.myfetchapplication.main_screen.MainScreen
+import com.sgut.android.myfetchapplication.ui.screens.favorites_screen.FavoitesScreen
+import com.sgut.android.myfetchapplication.ui.screens.main_screen.MainScreen
 
 //navigation content set up
 @Composable
@@ -25,9 +25,7 @@ fun Navigation(
         composable(
             route = NavigationScreens.MainScreen.route
         ) {
-            MainScreen(
-                navController = appState.navController
-            )
+            MainScreen()
         }
         composable(
             route = NavigationScreens.Favorites.route

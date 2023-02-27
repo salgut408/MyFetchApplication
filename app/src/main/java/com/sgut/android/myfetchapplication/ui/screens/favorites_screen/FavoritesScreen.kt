@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.favorites_screen
+package com.sgut.android.myfetchapplication.ui.screens.favorites_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -17,10 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.sgut.android.myfetchapplication.common_composables.BasicButton
-import com.sgut.android.myfetchapplication.common_composables.textButton
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
-import com.sgut.android.myfetchapplication.R.string as AppText
 
 
 @Composable
@@ -31,11 +28,7 @@ fun FavoitesScreen(
 
     Column() {
 
-        BasicButton(
-            text = AppText.clear_db,
-            modifier = Modifier.textButton(),
-            action = { favoritesScreenViewModel.onClearListClick() }
-        )
+
 
         FavoriteItemsList(
             uiState = favoritesScreenUiState,

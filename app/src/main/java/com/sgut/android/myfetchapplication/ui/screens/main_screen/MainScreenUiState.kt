@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.main_screen
+package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
 import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 
