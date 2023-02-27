@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication
+package com.sgut.android.myfetchapplication.ui.screens
 
 import androidx.navigation.NavHostController
 

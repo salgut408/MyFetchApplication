@@ -2,7 +2,6 @@ package com.sgut.android.myfetchapplication.domain
 
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.ui.screens.ItemUiModel
 
 interface ItemsRepositoryInterface {
 

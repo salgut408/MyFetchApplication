@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sgut.android.myfetchapplication.MyFetchAppState
+import com.sgut.android.myfetchapplication.ui.screens.MyFetchAppState
 import com.sgut.android.myfetchapplication.ui.common_composables.navigation.NavigationScreens
 import com.sgut.android.myfetchapplication.ui.screens.favorites_screen.FavoitesScreen
 import com.sgut.android.myfetchapplication.ui.screens.main_screen.MainScreen
