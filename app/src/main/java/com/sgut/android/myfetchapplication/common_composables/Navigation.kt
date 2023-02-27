@@ -11,6 +11,7 @@ import com.sgut.android.myfetchapplication.ui.screens.favorites_screen.FavoitesS
 import com.sgut.android.myfetchapplication.ui.screens.main_screen.MainScreen
 
 //navigation content set up
+
 @Composable
 fun Navigation(
     appState: MyFetchAppState,

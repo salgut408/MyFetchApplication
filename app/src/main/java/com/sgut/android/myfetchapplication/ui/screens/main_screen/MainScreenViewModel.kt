@@ -50,7 +50,9 @@ class MainScreenViewModel @Inject constructor(
             val result = itemRepository.getAllInfoFromRepository()
             _MainScreenUiState.update { currentState ->
                 currentState.copy(
-                    currentItems = result.sortedWith(ItemComparator).filter { it.name?.isNotEmpty() ?: false }
+                    currentItems = result
+                        .sortedWith(ItemComparator)
+                        .filter { it.name?.isNotEmpty() ?: false }
                 )
             }
         } catch (e: Exception) {

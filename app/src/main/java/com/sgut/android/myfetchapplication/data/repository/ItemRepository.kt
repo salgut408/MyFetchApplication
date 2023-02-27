@@ -27,14 +27,14 @@ class ItemRepository @Inject constructor(
         return result
     }
 
-// this gets all info, not sorted
+    // this gets all info, not sorted
     override  suspend fun getAllInfoFromRepository(): List<ItemDomainModel> {
         val result = dao.getAllInfoFromDb()
         return result
 
     }
 
-//this gets all favorites
+    //this gets all favorite items from favorites table in db
     override suspend fun getFavorites(): List<FavoriteItem> {
         val result = dao.getAllFavoriteItems()
         return result
@@ -42,7 +42,7 @@ class ItemRepository @Inject constructor(
 
 
 
-    //repository is central place for all data changes
+    //repository is central place for all data changes so this is where extension f(x)'s called
 
     override  suspend fun saveFavoriteItem(item: ItemDomainModel){
         itemDatabase.getDao().insertFavoriteItem(item.asItemFavoritesDomainModel())
@@ -53,10 +53,6 @@ class ItemRepository @Inject constructor(
     }
 
 
-
-    override suspend fun clearTable() {
-        itemDatabase.getDao().deleteFavoriteItemTable()
-    }
 
     //calls for all infor for databaase no sort
     override suspend fun getInfoForDatabaseNoSort() {

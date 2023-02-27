@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 
+
 @Entity(tableName = "item_table")
 data class ItemDomainModel(
     @PrimaryKey(autoGenerate = false)

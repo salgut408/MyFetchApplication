@@ -28,7 +28,7 @@ fun MyFetchApp(
     val backStackEntry by appState.navController.currentBackStackEntryAsState()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             MainToolBar(
                 currentScreen = backStackEntry?.destination?.route ?: NavigationScreens.MainScreen.route,
@@ -38,10 +38,10 @@ fun MyFetchApp(
             )
         },
         bottomBar = {
-            BottomAppBar(modifier = Modifier) {
+            BottomAppBar(modifier = modifier) {
                 IconButton(onClick = {
                     appState.navController.navigate(NavigationScreens.Favorites.route) {
-                    // this makes only one screen even if clicked multiple times so theyre not added to back stack
+                    // this makes only one screen even if clicked multiple times so they're not added to back stack
                         this.launchSingleTop = true
                     }
                 }) {
