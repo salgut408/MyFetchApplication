@@ -20,8 +20,8 @@ This pattern is used across the different screens: The ViewModel is implemented 
 The UI uses `MainScreenViewModel`, and observes it's `MainScreenViewState` as Compose State, using `collectAsStateWithLifecycle()`
 
 #Saved state across configuration changes
-ViewModels are used to save state across any configuration changes.
-Certain composable states are saved across configurations changes using `rememberSaveable` in the `SaveItemButton`
+- ViewModels are used to save state across any configuration changes.
+- Certain composable states are saved across configurations changes using `rememberSaveable` in the `SaveItemButton`
 
 
 The Repository class is responsible for handling the data fetching of all information, as well as a centralized place for all data changes*
