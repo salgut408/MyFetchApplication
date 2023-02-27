@@ -38,6 +38,7 @@ This app contains 2 screens:
 
 - __FavoritesScreen__ is where a list of favorited items is displayed. 
 
+### Tests
 
 
 
