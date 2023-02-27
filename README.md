@@ -25,11 +25,19 @@ Certain composable states are saved across configurations changes using `remembe
 
 The Repository class is responsible for handling the data fetching of all information, as well as a centralized place for all data changes*
 
+Single activity app, `MainActivity` contains `MyFetchApp()` composable which is entrypoint to the app. 
+`MyFetchApp()` sets up a layout at the app level using  `Scaffold` consisting to a scrolling top app bar and a bottom bar. The content in this `Scaffold`
+is the app's `Navigation()` composable where the app's NavHost is defined. `MyFetchAppState` holds the actual NavHostController for all of the app.
+
+
+
+
 
 ## Screens
-This app has 2 screens:
-__MainScreen__
-__FavoritesScreen__
+This app contains 2 screens:
+- __MainScreen__ is where a sorted list of Items is displayed. You can click to add an item to a "Favorites list" which is stored to a FavoriteItems table in Room. The `SaveItemButton` will change to show you you have added the item to your favorites list by changing 
+
+__FavoritesScreen__ is where a list of favorited items is displayed. 
 
 
 
