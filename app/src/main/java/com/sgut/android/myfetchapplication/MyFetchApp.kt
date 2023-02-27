@@ -2,20 +2,18 @@ package com.sgut.android.myfetchapplication
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import com.sgut.android.myfetchapplication.common_composables.MainToolBar
-import com.sgut.android.myfetchapplication.common_composables.Navigation
-import com.sgut.android.myfetchapplication.common_composables.NavigationScreens
+import com.sgut.android.myfetchapplication.ui.common_composables.MainToolBar
+import com.sgut.android.myfetchapplication.ui.common_composables.Navigation
+import com.sgut.android.myfetchapplication.ui.common_composables.navigation.NavigationScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

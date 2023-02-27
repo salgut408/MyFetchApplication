@@ -6,7 +6,7 @@ import com.sgut.android.myfetchapplication.data.db.ItemDatabase
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.domain_models.asItemFavoritesDomainModel
-import com.sgut.android.myfetchapplication.data.dto_mappers.NetworkItemDtoMapperImpl
+import com.sgut.android.myfetchapplication.domain_models.dto_mappers.NetworkItemDtoMapperImpl
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

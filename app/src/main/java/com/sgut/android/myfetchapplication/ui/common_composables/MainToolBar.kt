@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.common_composables
+package com.sgut.android.myfetchapplication.ui.common_composables
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack

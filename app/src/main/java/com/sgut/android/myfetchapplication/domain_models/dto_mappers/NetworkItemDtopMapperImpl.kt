@@ -1,9 +1,9 @@
-package com.sgut.android.myfetchapplication.data.dto_mappers
+package com.sgut.android.myfetchapplication.domain_models.dto_mappers
 
 import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.data.remote.network_responses.NetworkItem
 
-class NetworkItemDtoMapperImpl : DomainMapperInterface<NetworkItem, ItemDomainModel>{
+class NetworkItemDtoMapperImpl : DomainMapperInterface<NetworkItem, ItemDomainModel> {
     override fun mapToDomainModel(model: NetworkItem): ItemDomainModel {
         return ItemDomainModel(
             id = model.id,

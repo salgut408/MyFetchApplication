@@ -1,5 +1,4 @@
-package com.sgut.android.myfetchapplication.common_composables
-import com.sgut.android.myfetchapplication.R.string as AppText
+package com.sgut.android.myfetchapplication.ui.common_composables.navigation
 
 // navigation screens
 sealed class NavigationScreens(val route: String){

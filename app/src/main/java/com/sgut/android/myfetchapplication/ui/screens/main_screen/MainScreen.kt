@@ -153,7 +153,7 @@ fun SaveItemButton(
    ) {
        AnimatedVisibility(visible = isPressed) {
            if (isPressed){
-               Row() {
+               Row {
                    icon()
                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
                }
