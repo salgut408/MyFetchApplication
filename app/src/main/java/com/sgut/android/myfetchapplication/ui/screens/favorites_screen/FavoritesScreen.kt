@@ -26,9 +26,10 @@ fun FavoitesScreen(
 ) {
     val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState()
 
-        FavoriteItemsList(
-            uiState = favoritesScreenUiState,
-        )
+
+    FavoriteItemsList(
+        uiState = favoritesScreenUiState,
+    )
 }
 
 @Composable
@@ -83,7 +84,7 @@ fun FavoriteItemsList(
                 FavoriteItemCard(
                     item = item, modifier = Modifier.padding(8.dp),
 
-                )
+                    )
             }
         }
     }

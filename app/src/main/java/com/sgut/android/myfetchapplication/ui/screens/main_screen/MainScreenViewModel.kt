@@ -71,7 +71,7 @@ class MainScreenViewModel @Inject constructor(
            val result = itemRepository.getSortedListExNullsExBlanksFromRepository()
            _MainScreenUiState.update { currentState ->
                currentState.copy(
-                   currentItems = result
+                   currentItems = result,
                )
            }
        } catch (e: Exception) {

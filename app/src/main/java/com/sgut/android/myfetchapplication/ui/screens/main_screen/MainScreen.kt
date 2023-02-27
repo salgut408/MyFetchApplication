@@ -61,7 +61,8 @@ fun MainScreenContent(
 fun ItemCard(
     item: ItemDomainModel,
     modifier: Modifier,
-    mainScreenViewModel: MainScreenViewModel
+    mainScreenViewModel: MainScreenViewModel,
+
     ) {
     Card(
         shape = RoundedCornerShape(10.dp),
