@@ -1,7 +1,7 @@
 package com.sgut.android.myfetchapplication.data.db
 
 import androidx.room.*
-import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 
 @Dao
 interface ItemDao {

@@ -4,10 +4,11 @@ import android.util.Log
 import com.sgut.android.myfetchapplication.data.db.ItemDao
 import com.sgut.android.myfetchapplication.data.db.ItemDatabase
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
-import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.domain_models.asItemFavoritesDomainModel
-import com.sgut.android.myfetchapplication.domain_models.dto_mappers.NetworkItemDtoMapperImpl
+import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain.domain_models.asItemFavoritesDomainModel
+import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
+import com.sgut.android.myfetchapplication.domain.ItemsRepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -54,7 +55,7 @@ class ItemRepository @Inject constructor(
 
 
 
-    //calls for all infor for databaase no sort
+    //calls for all items to populate databaase no sorting
     override suspend fun getInfoForDatabaseNoSort() {
         withContext(Dispatchers.IO) {
             try {
@@ -62,7 +63,7 @@ class ItemRepository @Inject constructor(
                     ?.let { networkItemDtoMapperImpl.toDomainList(it) }
                 items?.map{dao.update(it)}
             } catch (err: Exception) {
-                Log.i("Tag", "Failed")
+                Log.i("Tag", "Failed, ${err.message.toString()}")
             }
         }
     }

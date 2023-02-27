@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.utils.formatTo
+import java.util.*
 import com.sgut.android.myfetchapplication.R.string as AppText
 
 
@@ -33,13 +35,11 @@ fun MainScreen(
 ) {
    val uiState by mainScreenViewModel.mainScreenUiState.collectAsState()
 
-
     MainScreenContent(
         modifier = Modifier,
         mainScreenViewModel = mainScreenViewModel,
         uiState = uiState
     )
-
 }
 
 @Composable
@@ -109,9 +109,7 @@ fun ItemCard(
               icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
               isPressed = isPressed
           )
-          
       }
-
     }
 }
 

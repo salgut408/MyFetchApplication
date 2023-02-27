@@ -1,4 +1,4 @@
-package com.sgut.android.myfetchapplication.domain_models
+package com.sgut.android.myfetchapplication.domain.domain_models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

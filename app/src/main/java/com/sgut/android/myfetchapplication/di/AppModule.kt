@@ -6,7 +6,7 @@ import com.sgut.android.myfetchapplication.utils.Constants.Companion.BASE_URL
 import com.sgut.android.myfetchapplication.data.repository.ItemRepository
 import com.sgut.android.myfetchapplication.data.db.ItemDao
 import com.sgut.android.myfetchapplication.data.db.ItemDatabase
-import com.sgut.android.myfetchapplication.domain_models.dto_mappers.NetworkItemDtoMapperImpl
+import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
 import dagger.Module
 import dagger.Provides

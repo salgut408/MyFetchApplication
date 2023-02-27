@@ -1,6 +1,6 @@
 package com.sgut.android.myfetchapplication.utils
 
-import com.sgut.android.myfetchapplication.domain_models.ItemDomainModel
+import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 
 class ItemComparator {
     companion object: Comparator<ItemDomainModel> {
