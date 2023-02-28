@@ -20,25 +20,19 @@ class FavoritesScreenViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _FavoritesScreenUiState = MutableStateFlow(FavoritesScreenUiState())
-    val favoritesScreenUiState: StateFlow<FavoritesScreenUiState> = _FavoritesScreenUiState.asStateFlow()
-
-    var favesUiState by mutableStateOf(FavoritesScreenUiState())
-        private set
-
+    val favoritesScreenUiState: SharedFlow<FavoritesScreenUiState> = _FavoritesScreenUiState.asSharedFlow()
 
     init {
         showFavoriteItems()
     }
 
-
-
-
     private fun showFavoriteItems() = viewModelScope.launch {
-        val result = itemRepository.getFavorites()
-        _FavoritesScreenUiState.update { currentState ->
-            currentState.copy(
-                favoriteItems = result
-            )
+        itemRepository.getFavorites().collect { itemsList ->
+            _FavoritesScreenUiState.update { currentState ->
+                currentState.copy(
+                    favoriteItems = itemsList
+                )
+            }
         }
     }
 

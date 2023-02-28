@@ -31,7 +31,7 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
 ) {
-    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsState()
+    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsState(initial = MainScreenUiState())
 
     MainScreenContent(
         modifier = Modifier,
@@ -48,10 +48,13 @@ private fun MainScreenContent(
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
 ) {
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(
+        modifier = modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
        if(uiState.isLoading){
-           Text(text = "Loading!...")
+           Text(text = stringResource(id = AppText.loading), style = MaterialTheme.typography.body1)
        } else {
            ItemsList(
                uiState = uiState,

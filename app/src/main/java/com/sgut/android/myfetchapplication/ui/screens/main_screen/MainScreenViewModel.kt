@@ -21,15 +21,16 @@ class MainScreenViewModel @Inject constructor(
     private val itemRepository: ItemRepository,
 ): ViewModel(){
 
-    private val _MainScreenUiState = MutableStateFlow<MainScreenUiState>(MainScreenUiState())
-    val mainScreenUiState: StateFlow<MainScreenUiState> = _MainScreenUiState.asStateFlow()
+    private val _MainScreenUiState = MutableStateFlow(MainScreenUiState())
+    val mainScreenUiState: SharedFlow<MainScreenUiState> = _MainScreenUiState.asStateFlow()
 
 
     init {
         callInfoForDB()
 //        showInfoFromRepositorySorted()
-        showAllItemsSortAndFilteredInVm()
+//        showAllItemsSortAndFilteredInVm()
 //        showAllItemsFlow()
+        showAllItemsFromVmFlow()
 
     }
 
@@ -44,21 +45,33 @@ class MainScreenViewModel @Inject constructor(
 
     // this is supposed to sort with comparator in the Viewmodel
 
-    private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
-        try {
-            val result = itemRepository.getAllInfoFromRepository()
+//    private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
+//        try {
+//            val result = itemRepository.getAllInfoFromRepository()
+//            _MainScreenUiState.update { currentState ->
+//                currentState.copy(
+//                    currentItems = result
+//                        .sortedWith(ItemComparator)
+//                        .filter { it.name?.isNotEmpty() ?: false },
+//                    isLoading = false
+//                )
+//            }
+//        } catch (e: Exception) {
+//            Log.e("Error", e.message.toString())
+//        }
+//    }
+    private fun showAllItemsFromVmFlow() = viewModelScope.launch {
+        itemRepository.getAllInfoFromRepository().collect() { allItems ->
             _MainScreenUiState.update { currentState ->
                 currentState.copy(
-                    currentItems = result
+                    currentItems = allItems
                         .sortedWith(ItemComparator)
                         .filter { it.name?.isNotEmpty() ?: false },
                     isLoading = false
                 )
             }
-        } catch (e: Exception) {
-            Log.e("Error", e.message.toString())
         }
-    }
+}
 
 
 // this makes initial api call

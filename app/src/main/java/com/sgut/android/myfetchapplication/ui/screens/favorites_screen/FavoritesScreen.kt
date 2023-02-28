@@ -25,7 +25,8 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 fun FavoitesScreen(
     favoritesScreenViewModel: FavoritesScreenViewModel = hiltViewModel(),
 ) {
-    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState()
+    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(FavoritesScreenUiState())
+
 
    FavoritesContent(favoritesScreenUiState = favoritesScreenUiState)
 

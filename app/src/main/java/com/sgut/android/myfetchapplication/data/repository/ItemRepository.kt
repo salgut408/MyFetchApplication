@@ -10,6 +10,7 @@ import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.domain.domain_models.asItemFavoritesDomainModel
 import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -23,20 +24,20 @@ class ItemRepository @Inject constructor(
 ): ItemsRepositoryInterface {
 
     //this gets sorted list from sql in db
-    override suspend fun getSortedListExNullsExBlanksFromRepository(): List<ItemDomainModel> {
-        val result = dao.getInfoFromDbSortByListIdExNullsExBlanks()
-        return result
-    }
+//    override suspend fun getSortedListExNullsExBlanksFromRepository(): List<ItemDomainModel> {
+//        val result = dao.getInfoFromDbSortByListIdExNullsExBlanks()
+//        return result
+//    }
 
     // this gets all info, not sorted
-    override  suspend fun getAllInfoFromRepository(): List<ItemDomainModel> {
+    override  suspend fun getAllInfoFromRepository(): Flow<List<ItemDomainModel>> {
         val result = dao.getAllInfoFromDb()
         return result
 
     }
 
     //this gets all favorite items from favorites table in db
-    override suspend fun getFavorites(): List<FavoriteItem> {
+    override suspend fun getFavorites(): Flow<List<FavoriteItem>> {
         val result = dao.getAllFavoriteItems()
         return result
     }

@@ -2,6 +2,7 @@ package com.sgut.android.myfetchapplication.data.db
 
 import androidx.room.*
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
@@ -10,7 +11,7 @@ interface ItemDao {
 
     //this returns unsorted list from db
     @Query("SELECT * FROM item_table")
-    suspend fun getAllInfoFromDb(): List<ItemDomainModel>
+     fun getAllInfoFromDb(): Flow<List<ItemDomainModel>>
 
     //this returns a sorted list from db
     @Query("SELECT * FROM item_table WHERE NULLIF(name, '') IS NOT NULL ORDER BY listId ASC ")
@@ -20,7 +21,7 @@ interface ItemDao {
     suspend fun insertFavoriteItem(item: FavoriteItem)
 
     @Query("SELECT * FROM favorite_item_table")
-    suspend fun getAllFavoriteItems(): List<FavoriteItem>
+     fun getAllFavoriteItems(): Flow<List<FavoriteItem>>
 
     @Delete
     suspend fun delete(item: FavoriteItem)
