@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">My Fetch Application</string>
-    <string name="clear_db">Clear list</string>
     <string name="removed">Removed</string>
     <string name="add_to_favorites">Add to favorites</string>
+    <string name="no_favorites">No favorites!</string>
+
     <string name="saved">Saved</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
-import android.content.ClipData.Item
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -23,9 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.utils.formatTo
 import java.util.*
 import com.sgut.android.myfetchapplication.R.string as AppText
 
