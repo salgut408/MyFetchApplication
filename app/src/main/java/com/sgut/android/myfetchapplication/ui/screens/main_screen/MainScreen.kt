@@ -1,5 +1,6 @@
 package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
+import android.content.ClipData.Item
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -33,35 +34,39 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
 ) {
-   val uiState by mainScreenViewModel.mainScreenUiState.collectAsState()
+    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsState()
 
     MainScreenContent(
         modifier = Modifier,
-        mainScreenViewModel = mainScreenViewModel,
-        uiState = uiState
+        uiState = mainScreenUiState,
+        onAddClick = {item: ItemDomainModel -> mainScreenViewModel.onAddToFavoritesClick(item)},
+        onRemoveClick = {item: ItemDomainModel -> mainScreenViewModel.onRemovefromFavoritesClick(item)}
     )
 }
 
 @Composable
 fun MainScreenContent(
     modifier: Modifier,
-    mainScreenViewModel: MainScreenViewModel,
-    uiState: MainScreenUiState
+    uiState: MainScreenUiState,
+    onRemoveClick: (ItemDomainModel) -> Unit,
+    onAddClick: (ItemDomainModel) -> Unit,
 ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            ItemsList(
-                uiState = uiState,
-                mainScreenViewModel = mainScreenViewModel
-            )
-        }
+    Column(modifier = modifier.padding(16.dp)) {
+        ItemsList(
+            uiState = uiState,
+            onRemoveClick = onRemoveClick,
+            onAddClick = onAddClick
+        )
+    }
 }
 
 
 @Composable
 fun ItemCard(
-    item: ItemDomainModel,
     modifier: Modifier,
-    mainScreenViewModel: MainScreenViewModel,
+    item: ItemDomainModel,
+    onRemoveClick: (ItemDomainModel) -> Unit,
+    onAddClick: (ItemDomainModel) -> Unit,
 
     ) {
     Card(
@@ -73,44 +78,45 @@ fun ItemCard(
     ) {
         var isPressed by rememberSaveable { mutableStateOf(false) }
         val context = LocalContext.current
-      Row(
-          verticalAlignment = Alignment.CenterVertically,
-          horizontalArrangement = Arrangement.SpaceEvenly,
-      ) {
-          Text(
-              text = item.name ?: "",
-              color = Color.Black,
-              fontWeight = FontWeight.Bold,
-              fontSize = 20.sp
-          )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            Text(
+                text = item.name ?: "",
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
 
-          Text(
-              text = item.id.toString(),
-              color = Color.Black,
-              fontSize = 12.sp
-          )
+            Text(
+                text = item.id.toString(),
+                color = Color.Black,
+                fontSize = 12.sp
+            )
 
-          Text(
-              text = item.listId.toString(),
-              color = Color.Black,
-              fontSize = 12.sp
-          )
-          SaveItemButton(
-              onClick = {
-                  if (isPressed) {
-                      mainScreenViewModel.onRemovefromFavoritesClick(item)
-                      Toast.makeText(context, AppText.removed, Toast.LENGTH_SHORT).show()
-                  } else {
-                      mainScreenViewModel.onAddToFavoritesClick(item)
-                      Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()
-                  }
-                  isPressed = !isPressed
-              },
-              text = { Text(if (isPressed) stringResource(AppText.saved) else stringResource(AppText.add_to_favorites)) },
-              icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
-              isPressed = isPressed
-          )
-      }
+            Text(
+                text = item.listId.toString(),
+                color = Color.Black,
+                fontSize = 12.sp
+            )
+            SaveItemButton(
+                onClick = {
+
+                    if (isPressed) {
+                        onRemoveClick(item)
+                        Toast.makeText(context, AppText.removed, Toast.LENGTH_SHORT).show()
+                    } else {
+                        onAddClick(item)
+                        Toast.makeText(context, AppText.saved, Toast.LENGTH_SHORT).show()
+                    }
+                    isPressed = !isPressed
+                },
+                text = { Text(if (isPressed) stringResource(AppText.saved) else stringResource(AppText.add_to_favorites)) },
+                icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
+                isPressed = isPressed
+            )
+        }
     }
 }
 
@@ -119,22 +125,22 @@ fun ItemCard(
 @Composable
 fun ItemsList(
     uiState: MainScreenUiState,
-    mainScreenViewModel: MainScreenViewModel
-) {
+    onRemoveClick: (ItemDomainModel) -> Unit,
+    onAddClick: (ItemDomainModel) -> Unit,
+    ) {
     LazyColumn {
         items(items = uiState.currentItems) { item ->
             Row(modifier = Modifier.animateItemPlacement()) {
                 ItemCard(
-                    item = item, modifier = Modifier.padding(8.dp),
-                    mainScreenViewModel = mainScreenViewModel
-
+                    item = item,
+                    modifier = Modifier.padding(8.dp),
+                    onAddClick = onAddClick,
+                    onRemoveClick = onRemoveClick
                 )
             }
         }
     }
 }
-
-
 
 
 @Composable
@@ -143,23 +149,23 @@ fun SaveItemButton(
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    isPressed: Boolean
+    isPressed: Boolean,
 ) {
-   Button(
-       onClick = onClick,
-       modifier = modifier,
-       interactionSource = remember { MutableInteractionSource() }
-   ) {
-       AnimatedVisibility(visible = isPressed) {
-           if (isPressed){
-               Row {
-                   icon()
-                   Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-               }
-           }
-       }
-       text()
-   }
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        interactionSource = remember { MutableInteractionSource() }
+    ) {
+        AnimatedVisibility(visible = isPressed) {
+            if (isPressed) {
+                Row {
+                    icon()
+                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                }
+            }
+        }
+        text()
+    }
 }
 
 

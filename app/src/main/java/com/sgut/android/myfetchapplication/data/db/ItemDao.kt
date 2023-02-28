@@ -25,6 +25,4 @@ interface ItemDao {
     @Delete
     suspend fun delete(item: FavoriteItem)
 
-
-
 }
