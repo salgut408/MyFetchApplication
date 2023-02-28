@@ -24,10 +24,7 @@ class ItemRepository @Inject constructor(
 ): ItemsRepositoryInterface {
 
     //this gets sorted list from sql in db
-//    override suspend fun getSortedListExNullsExBlanksFromRepository(): List<ItemDomainModel> {
-//        val result = dao.getInfoFromDbSortByListIdExNullsExBlanks()
-//        return result
-//    }
+
 
     // this gets all info, not sorted
     override  suspend fun getAllInfoFromRepository(): Flow<List<ItemDomainModel>> {

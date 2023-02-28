@@ -27,10 +27,8 @@ class MainScreenViewModel @Inject constructor(
 
     init {
         callInfoForDB()
-//        showInfoFromRepositorySorted()
-//        showAllItemsSortAndFilteredInVm()
-//        showAllItemsFlow()
-        showAllItemsFromVmFlow()
+
+        showAllItemsSortAndFilteredInVm()
 
     }
 
@@ -43,24 +41,8 @@ class MainScreenViewModel @Inject constructor(
     }
 
 
-    // this is supposed to sort with comparator in the Viewmodel
-
-//    private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
-//        try {
-//            val result = itemRepository.getAllInfoFromRepository()
-//            _MainScreenUiState.update { currentState ->
-//                currentState.copy(
-//                    currentItems = result
-//                        .sortedWith(ItemComparator)
-//                        .filter { it.name?.isNotEmpty() ?: false },
-//                    isLoading = false
-//                )
-//            }
-//        } catch (e: Exception) {
-//            Log.e("Error", e.message.toString())
-//        }
-//    }
-    private fun showAllItemsFromVmFlow() = viewModelScope.launch {
+    //  sorts with comparator in the Viewmodel and emits it
+    private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
     try {
         itemRepository.getAllInfoFromRepository().collect { allItems ->
             _MainScreenUiState.update { currentState ->
@@ -84,18 +66,4 @@ class MainScreenViewModel @Inject constructor(
         itemRepository.getInfoForDatabaseNoSort()
     }
 
-// this calls pre sorted info from repository/database
-//   private fun showInfoFromRepositorySorted() = viewModelScope.launch {
-//       try {
-//
-//           val result = itemRepository.getSortedListExNullsExBlanksFromRepository()
-//           _MainScreenUiState.update { currentState ->
-//               currentState.copy(
-//                   currentItems = result,
-//               )
-//           }
-//       } catch (e: Exception) {
-//           Log.e("Error", e.message.toString())
-//       }
-//    }
 }

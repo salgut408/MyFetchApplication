@@ -13,10 +13,6 @@ interface ItemDao {
     @Query("SELECT * FROM item_table")
      fun getAllInfoFromDb(): Flow<List<ItemDomainModel>>
 
-    //this returns a sorted list from db
-    @Query("SELECT * FROM item_table WHERE NULLIF(name, '') IS NOT NULL ORDER BY listId ASC ")
-    suspend fun getInfoFromDbSortByListIdExNullsExBlanks(): List<ItemDomainModel>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteItem(item: FavoriteItem)
 

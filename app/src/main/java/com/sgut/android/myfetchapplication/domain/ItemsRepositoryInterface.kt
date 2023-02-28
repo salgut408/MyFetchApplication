@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ItemsRepositoryInterface {
 
-//    suspend fun getSortedListExNullsExBlanksFromRepository(): List<ItemDomainModel>
     suspend fun getAllInfoFromRepository(): Flow<List<ItemDomainModel>>
     suspend fun getFavorites(): Flow<List<FavoriteItem>>
     suspend fun saveFavoriteItem(item: ItemDomainModel)
