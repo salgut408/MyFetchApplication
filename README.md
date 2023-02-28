@@ -1,5 +1,8 @@
 # MyFetchApplication
 
+![Screenshot_20230228_162859](https://user-images.githubusercontent.com/61568828/221996345-22ee1e24-4dda-4a60-8fde-c38c5770cd82.png)
+
+
 - UI written in Jetpack Compose 
 - Dependency Injections with Hilt 
 - Local storage with Room
