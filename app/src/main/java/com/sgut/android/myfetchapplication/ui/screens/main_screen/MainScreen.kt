@@ -102,7 +102,6 @@ fun ItemCard(
             )
             SaveItemButton(
                 onClick = {
-
                     if (isPressed) {
                         onRemoveClick(item)
                         Toast.makeText(context, AppText.removed, Toast.LENGTH_SHORT).show()
@@ -129,8 +128,11 @@ fun ItemsList(
     onAddClick: (ItemDomainModel) -> Unit,
     ) {
     LazyColumn {
-        items(items = uiState.currentItems) { item ->
-            Row(modifier = Modifier.animateItemPlacement()) {
+        items(
+            items = uiState.currentItems,
+          // add key to limit recompositions
+        ) { item ->
+            Row {
                 ItemCard(
                     item = item,
                     modifier = Modifier.padding(8.dp),

@@ -26,10 +26,35 @@ fun FavoitesScreen(
 ) {
     val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState()
 
+   FavoritesContent(favoritesScreenUiState = favoritesScreenUiState)
 
-    FavoriteItemsList(
-        uiState = favoritesScreenUiState,
-    )
+
+}
+
+@Composable
+fun FavoritesContent(favoritesScreenUiState: FavoritesScreenUiState) {
+    if (favoritesScreenUiState.favoriteItems.isEmpty()) {
+        NoItems()
+    } else {
+        FavoriteItemsList(uiState = favoritesScreenUiState)
+    }
+}
+
+@Composable
+fun NoItems(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "No Favorites",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
 }
 
 @Composable
@@ -47,7 +72,7 @@ fun FavoriteItemCard(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         ) {
             Text(
                 text = item.name ?: "",
@@ -73,14 +98,13 @@ fun FavoriteItemCard(
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoriteItemsList(
     uiState: FavoritesScreenUiState,
 ) {
     LazyColumn {
         items(items = uiState.favoriteItems) { item ->
-            Row(modifier = Modifier.animateItemPlacement()) {
+            Row {
                 FavoriteItemCard(
                     item = item, modifier = Modifier.padding(8.dp),
 

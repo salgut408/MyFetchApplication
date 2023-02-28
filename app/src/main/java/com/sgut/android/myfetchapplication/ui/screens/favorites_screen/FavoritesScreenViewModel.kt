@@ -30,6 +30,7 @@ class FavoritesScreenViewModel @Inject constructor(
 
     private fun showFavoriteItems() = viewModelScope.launch {
         val result = itemRepository.getFavorites()
+
         _FavoritesScreenUiState.update { currentState ->
             currentState.copy(
                 favoriteItems = result
