@@ -42,24 +42,31 @@ fun MainScreen(
 }
 
 @Composable
-fun MainScreenContent(
+private fun MainScreenContent(
     modifier: Modifier,
     uiState: MainScreenUiState,
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
 ) {
     Column(modifier = modifier.padding(16.dp)) {
-        ItemsList(
-            uiState = uiState,
-            onRemoveClick = onRemoveClick,
-            onAddClick = onAddClick
-        )
+
+       if(uiState.isLoading){
+           Text(text = "Loading!...")
+       } else {
+           ItemsList(
+               uiState = uiState,
+               onRemoveClick = onRemoveClick,
+               onAddClick = onAddClick
+           )
+       }
+
+
     }
 }
 
 
 @Composable
-fun ItemCard(
+private fun ItemCard(
     modifier: Modifier,
     item: ItemDomainModel,
     onRemoveClick: (ItemDomainModel) -> Unit,
@@ -117,9 +124,8 @@ fun ItemCard(
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ItemsList(
+private fun ItemsList(
     uiState: MainScreenUiState,
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
@@ -143,7 +149,7 @@ fun ItemsList(
 
 
 @Composable
-fun SaveItemButton(
+private fun SaveItemButton(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit,

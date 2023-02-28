@@ -32,7 +32,7 @@ fun FavoitesScreen(
 }
 
 @Composable
-fun FavoritesContent(favoritesScreenUiState: FavoritesScreenUiState) {
+private fun FavoritesContent(favoritesScreenUiState: FavoritesScreenUiState) {
     if (favoritesScreenUiState.favoriteItems.isEmpty()) {
         NoItems()
     } else {
@@ -41,7 +41,7 @@ fun FavoritesContent(favoritesScreenUiState: FavoritesScreenUiState) {
 }
 
 @Composable
-fun NoItems(
+private fun NoItems(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -58,7 +58,7 @@ fun NoItems(
 }
 
 @Composable
-fun FavoriteItemCard(
+private fun FavoriteItemCard(
     item: FavoriteItem,
     modifier: Modifier,
 ) {
@@ -99,7 +99,7 @@ fun FavoriteItemCard(
 
 
 @Composable
-fun FavoriteItemsList(
+private fun FavoriteItemsList(
     uiState: FavoritesScreenUiState,
 ) {
     LazyColumn {
