@@ -61,7 +61,8 @@ class MainScreenViewModel @Inject constructor(
 //        }
 //    }
     private fun showAllItemsFromVmFlow() = viewModelScope.launch {
-        itemRepository.getAllInfoFromRepository().collect() { allItems ->
+    try {
+        itemRepository.getAllInfoFromRepository().collect { allItems ->
             _MainScreenUiState.update { currentState ->
                 currentState.copy(
                     currentItems = allItems
@@ -71,6 +72,10 @@ class MainScreenViewModel @Inject constructor(
                 )
             }
         }
+    } catch (e: Exception){
+        Log.e("Error", e.message.toString())
+    }
+
 }
 
 
