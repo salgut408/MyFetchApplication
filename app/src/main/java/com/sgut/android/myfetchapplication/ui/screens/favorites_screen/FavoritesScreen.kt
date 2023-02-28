@@ -28,7 +28,6 @@ fun FavoitesScreen(
 
    FavoritesContent(favoritesScreenUiState = favoritesScreenUiState)
 
-
 }
 
 @Composable

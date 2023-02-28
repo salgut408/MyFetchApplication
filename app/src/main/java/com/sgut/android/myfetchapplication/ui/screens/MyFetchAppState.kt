@@ -2,7 +2,7 @@ package com.sgut.android.myfetchapplication.ui.screens
 
 import androidx.navigation.NavHostController
 
-    //app state holds nav controller
+    //app level state holder - nav controller
 class MyFetchAppState(
     val navController: NavHostController,
 )
