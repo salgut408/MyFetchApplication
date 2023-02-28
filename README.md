@@ -1,6 +1,5 @@
 # MyFetchApplication
 
-![Screenshot_20230228_162859](https://user-images.githubusercontent.com/61568828/221996345-22ee1e24-4dda-4a60-8fde-c38c5770cd82.png)
 
 
 - UI written in Jetpack Compose 
@@ -47,8 +46,9 @@ This app contains 2 screens:
 
 - __FavoritesScreen__ is where a list of favorited items is displayed. 
 
+![Screenshot_20230228_162859](https://user-images.githubusercontent.com/61568828/221996345-22ee1e24-4dda-4a60-8fde-c38c5770cd82.png)
 
-
+![Screenshot_20230228_162916](https://user-images.githubusercontent.com/61568828/221996559-6eb9701e-50f7-47a6-9e95-1f15a8fa805c.png)
 
 
 
