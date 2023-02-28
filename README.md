@@ -27,6 +27,8 @@ Different strategies used for sorting and filtering the information displayed wi
 -__ViewModel__ the `ItemDao` returns a UNSORTED Flow<List> of Items with the function `getAllInfoFromDb`, this function is then called in the `ItemRepository` function `getAllInfromFromRepository` the list is finally sorted by the `MainScreenViewModel using the helper class `ItemComparator`. This follows the thought that all ui data that will be displayed by the ui will be managed by the ViewModel and uses Flows advantages of have the viewModel operate as an intermediary between the data stream producing `ItemRepository` before consumption by the UI.
 
 -__Database__ the `ItemDao` returns a sorted list with the suspend function `getSortedListExNullsExBlanksFromRepository` this uses a query to sort and filter out items in the list.
+  
+--__ViewModel__ the repository can also be used to filer and sort the list
 
 
 ### Saved state across configuration changes
