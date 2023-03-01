@@ -16,6 +16,7 @@ import com.sgut.android.myfetchapplication.ui.common_composables.Navigation
 import com.sgut.android.myfetchapplication.ui.common_composables.navigation.NavigationScreens
 import com.sgut.android.myfetchapplication.ui.screens.MyFetchAppState
 
+    //App level container
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyFetchApp(
@@ -57,6 +58,8 @@ fun MyFetchApp(
         )
     }
 }
+
+    // navController created in a place in the hierarchy where all composables that need it have access
 @Composable
 fun rememberAppState(
     navController: NavHostController = rememberNavController(),

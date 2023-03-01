@@ -11,7 +11,7 @@ import com.sgut.android.myfetchapplication.ui.common_composables.navigation.Navi
 import com.sgut.android.myfetchapplication.ui.screens.favorites_screen.FavoritesScreen
 import com.sgut.android.myfetchapplication.ui.screens.main_screen.MainScreen
 
-//navigation content set up
+//navigation content navGraph set up
 
 @Composable
 fun Navigation(
