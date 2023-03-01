@@ -18,8 +18,8 @@ This app shows a sorted list of items retrieved from an API using Retrofit. You 
 Each UI 'screen' has its own ViewModel, and exposes a  SharedFlow containing the state for the screen. 
 
 A ViewModel is implemented as `MainScreenViewModel`, exposing a `SharedFlow<MainScreenUiState>` for the UI to observe and react to. 
-`MainScreenUiState` contains the view state data for the screen as a data class consisting of a list...
-The UI uses `MainScreenViewModel`, and take the `MainScreenViewState` as State, using `collectAsStateWithLifecycle()`
+`MainScreenUiState` contains the view state data for the screen as a data class consisting of a sealed interface containing the "Content" (a list of items) and a loading state...
+The UI uses `MainScreenViewModel`, and takes the `MainScreenViewState` as State, using `collectAsStateWithLifecycle()`
 
 The ItemRepository class is responsible for handling the data fetching of all information, as well as a centralized place for all data model changes*
 
