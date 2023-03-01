@@ -32,13 +32,16 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
 ) {
-    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsStateWithLifecycle(initialValue = MainScreenUiState.Loading)
+    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsStateWithLifecycle(
+        initialValue = MainScreenUiState.Loading)
 
     MainScreenContent(
         modifier = Modifier,
         uiState = mainScreenUiState,
-        onAddClick = {item: ItemDomainModel -> mainScreenViewModel.onAddToFavoritesClick(item)},
-        onRemoveClick = {item: ItemDomainModel -> mainScreenViewModel.onRemovefromFavoritesClick(item)}
+        onAddClick = { item: ItemDomainModel -> mainScreenViewModel.onAddToFavoritesClick(item) },
+        onRemoveClick = { item: ItemDomainModel ->
+            mainScreenViewModel.onRemovefromFavoritesClick(item)
+        }
     )
 }
 
@@ -50,10 +53,12 @@ private fun MainScreenContent(
     onAddClick: (ItemDomainModel) -> Unit,
 ) {
     Column(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        when(uiState){
+        when (uiState) {
             MainScreenUiState.Loading -> Loading()
             is MainScreenUiState.Content -> ItemsList(items = uiState.itemsList,
                 onRemoveClick = onRemoveClick,
@@ -61,14 +66,16 @@ private fun MainScreenContent(
         }
     }
 }
+
 @Composable
 private fun Loading(
 ) {
     Text(
         text = stringResource(AppText.loading),
-        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+        style = MaterialTheme.typography.h2
     )
 }
+
 
 @Composable
 private fun ItemCard(
@@ -76,7 +83,7 @@ private fun ItemCard(
     item: ItemDomainModel,
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
-    ) {
+) {
     Card(
         shape = RoundedCornerShape(10.dp),
         elevation = 4.dp,
@@ -117,7 +124,9 @@ private fun ItemCard(
                     }
                     isPressed = !isPressed
                 },
-                text = { Text(if (isPressed) stringResource(AppText.saved) else stringResource(AppText.add_to_favorites)) },
+                text = {
+                    Text(if (isPressed) stringResource(AppText.saved) else stringResource(AppText.add_to_favorites))
+                },
                 icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
                 isPressed = isPressed
             )
@@ -131,11 +140,11 @@ private fun ItemsList(
     items: List<ItemDomainModel>,
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
-    ) {
+) {
     LazyColumn {
         items(
             items = items,
-          // add key to limit recompositions
+            // add key to limit recompositions
         ) { item ->
             Row {
                 ItemCard(

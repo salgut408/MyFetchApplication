@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +42,9 @@ private fun FavoritesContent(
     favoritesScreenUiState: FavoritesScreenUiState,
 ) {
     Column(
-        modifier = modifier.padding(16.dp).fillMaxWidth(),
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         when (favoritesScreenUiState) {
@@ -109,7 +110,6 @@ private fun FavoriteItemsList(
             Row {
                 FavoriteItemCard(
                     item = item, modifier = Modifier.padding(8.dp),
-
                     )
             }
         }
