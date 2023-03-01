@@ -27,7 +27,6 @@ fun FavoitesScreen(
 ) {
     val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(FavoritesScreenUiState())
 
-
    FavoritesContent(favoritesScreenUiState = favoritesScreenUiState)
 
 }
@@ -81,23 +80,19 @@ private fun FavoriteItemCard(
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
-
             Text(
                 text = item.id.toString(),
                 color = Color.Black,
                 fontSize = 20.sp
             )
-
             Text(
                 text = item.listId.toString(),
                 color = Color.Black,
                 fontSize = 20.sp
             )
         }
-
     }
 }
-
 
 @Composable
 private fun FavoriteItemsList(

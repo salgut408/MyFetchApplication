@@ -3,7 +3,7 @@ package com.sgut.android.myfetchapplication.di
 import android.content.Context
 import androidx.room.Room
 import com.sgut.android.myfetchapplication.utils.Constants.Companion.BASE_URL
-import com.sgut.android.myfetchapplication.data.repository.ItemRepository
+import com.sgut.android.myfetchapplication.data.repository.ItemRepositoryImpl
 import com.sgut.android.myfetchapplication.data.db.ItemDao
 import com.sgut.android.myfetchapplication.data.db.ItemDatabase
 import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
@@ -43,7 +43,7 @@ object AppModule {
         dao: ItemDao,
         api: FetchApi,
         itemDatabase: ItemDatabase
-    ): ItemRepository = ItemRepository(
+    ): ItemRepositoryImpl = ItemRepositoryImpl(
         networkItemDtoMapperImpl,
         dao,
         api,

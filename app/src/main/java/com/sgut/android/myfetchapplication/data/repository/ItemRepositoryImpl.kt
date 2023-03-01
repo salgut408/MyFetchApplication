@@ -5,7 +5,7 @@ import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 import com.sgut.android.myfetchapplication.data.db.ItemDao
 import com.sgut.android.myfetchapplication.data.db.ItemDatabase
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
-import com.sgut.android.myfetchapplication.domain.ItemsRepositoryInterface
+import com.sgut.android.myfetchapplication.domain.ItemsRepository
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.domain.domain_models.asItemFavoritesDomainModel
 import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
@@ -14,14 +14,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-//ItemRepository Implementation
+//ItemRepositoryImpl Implementation
 
-class ItemRepository @Inject constructor(
+class ItemRepositoryImpl @Inject constructor(
     val networkItemDtoMapperImpl: NetworkItemDtoMapperImpl,
     val dao: ItemDao,
     val api: FetchApi,
     val itemDatabase: ItemDatabase
-): ItemsRepositoryInterface {
+): ItemsRepository {
 
     //this gets sorted list from sql in db
 

@@ -1,51 +1,43 @@
 package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
+import com.sgut.android.myfetchapplication.data.repository.ItemRepositoryImpl
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.data.repository.ItemRepository
+import com.sgut.android.myfetchapplication.domain.ItemsRepository
 import com.sgut.android.myfetchapplication.utils.ItemComparator
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    private val itemRepository: ItemRepository,
+    private val itemsRepository: ItemRepositoryImpl,
 ): ViewModel(){
 
-    private val _MainScreenUiState = MutableStateFlow(MainScreenUiState())
-    val mainScreenUiState: SharedFlow<MainScreenUiState> = _MainScreenUiState.asStateFlow()
-
+    private val _mainScreenUiState = MutableStateFlow(MainScreenUiState())
+    val mainScreenUiState: SharedFlow<MainScreenUiState> = _mainScreenUiState.asStateFlow()
 
     init {
         callInfoForDB()
-
         showAllItemsSortAndFilteredInVm()
-
     }
 
     fun onRemovefromFavoritesClick(item: ItemDomainModel) = viewModelScope.launch {
-        itemRepository.deleteFavorteItem(item)
+        itemsRepository.deleteFavorteItem(item)
     }
 
     fun onAddToFavoritesClick(item: ItemDomainModel) = viewModelScope.launch {
-        itemRepository.saveFavoriteItem(item)
+        itemsRepository.saveFavoriteItem(item)
     }
 
-
-    //  sorts with comparator in the Viewmodel and emits it
+    //  sorts with comparator in the ViewModel and emits it
     private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
     try {
-        itemRepository.getAllInfoFromRepository().collect { allItems ->
-            _MainScreenUiState.update { currentState ->
+        itemsRepository.getAllInfoFromRepository().collect { allItems ->
+            _mainScreenUiState.update { currentState ->
                 currentState.copy(
                     currentItems = allItems
                         .sortedWith(ItemComparator)
@@ -57,13 +49,11 @@ class MainScreenViewModel @Inject constructor(
     } catch (e: Exception){
         Log.e("Error", e.message.toString())
     }
-
 }
 
 
 // this makes initial api call
     private fun callInfoForDB() = viewModelScope.launch {
-        itemRepository.getInfoForDatabaseNoSort()
+        itemsRepository.getInfoForDatabaseNoSort()
     }
-
 }

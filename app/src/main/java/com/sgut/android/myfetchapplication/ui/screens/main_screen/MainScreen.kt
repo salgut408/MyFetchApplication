@@ -52,7 +52,6 @@ private fun MainScreenContent(
         modifier = modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
        if(uiState.isLoading){
            Text(text = stringResource(id = AppText.loading), style = MaterialTheme.typography.body1)
        } else {
@@ -62,8 +61,6 @@ private fun MainScreenContent(
                onAddClick = onAddClick
            )
        }
-
-
     }
 }
 
@@ -74,7 +71,6 @@ private fun ItemCard(
     item: ItemDomainModel,
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
-
     ) {
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -95,13 +91,11 @@ private fun ItemCard(
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
-
             Text(
                 text = item.id.toString(),
                 color = Color.Black,
                 fontSize = 12.sp
             )
-
             Text(
                 text = item.listId.toString(),
                 color = Color.Black,
