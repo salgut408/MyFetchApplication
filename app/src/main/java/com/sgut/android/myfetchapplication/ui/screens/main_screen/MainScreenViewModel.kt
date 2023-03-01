@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sgut.android.myfetchapplication.data.repository.ItemRepositoryImpl
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.domain.ItemsRepository
 import com.sgut.android.myfetchapplication.utils.ItemComparator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -17,8 +16,8 @@ class MainScreenViewModel @Inject constructor(
     private val itemsRepository: ItemRepositoryImpl,
 ): ViewModel(){
 
-    private val _mainScreenUiState = MutableStateFlow(MainScreenUiState())
-    val mainScreenUiState: SharedFlow<MainScreenUiState> = _mainScreenUiState.asStateFlow()
+    private val _mainScreenUiState = MutableStateFlow<MainScreenUiState>(MainScreenUiState.Loading)
+    val mainScreenUiState: SharedFlow<MainScreenUiState> = _mainScreenUiState.asSharedFlow()
 
     init {
         callInfoForDB()
@@ -35,21 +34,15 @@ class MainScreenViewModel @Inject constructor(
 
     //  sorts with comparator in the ViewModel and emits it
     private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
-    try {
-        itemsRepository.getAllInfoFromRepository().collect { allItems ->
-            _mainScreenUiState.update { currentState ->
-                currentState.copy(
-                    currentItems = allItems
-                        .sortedWith(ItemComparator)
-                        .filter { it.name?.isNotEmpty() ?: false },
-                    isLoading = false
-                )
+        try {
+            itemsRepository.getAllInfoFromRepository().collect { allItems ->
+                _mainScreenUiState.emit(MainScreenUiState.Content(allItems.sortedWith(ItemComparator).filter { it.name?.isNotEmpty() ?: false }))
             }
+        } catch (e: Exception){
+            Log.e("Error", e.message.toString())
         }
-    } catch (e: Exception){
-        Log.e("Error", e.message.toString())
+
     }
-}
 
 
 // this makes initial api call

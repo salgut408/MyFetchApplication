@@ -21,7 +21,6 @@ import com.sgut.android.myfetchapplication.ui.screens.MyFetchAppState
 fun MyFetchApp(
     modifier: Modifier = Modifier,
 ) {
-
     val appState = rememberAppState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val backStackEntry by appState.navController.currentBackStackEntryAsState()

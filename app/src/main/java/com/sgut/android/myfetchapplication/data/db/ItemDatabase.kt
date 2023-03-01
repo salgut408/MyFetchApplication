@@ -11,5 +11,4 @@ import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 )
 abstract class ItemDatabase : RoomDatabase() {
     abstract fun getDao(): ItemDao
-
 }

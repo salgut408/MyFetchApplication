@@ -22,22 +22,26 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 
 
 @Composable
-fun FavoitesScreen(
+fun FavoritesScreen(
     favoritesScreenViewModel: FavoritesScreenViewModel = hiltViewModel(),
 ) {
-    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(FavoritesScreenUiState())
+    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(FavoritesScreenUiState.IsEmpty)
 
    FavoritesContent(favoritesScreenUiState = favoritesScreenUiState)
-
 }
 
 @Composable
 private fun FavoritesContent(favoritesScreenUiState: FavoritesScreenUiState) {
-    if (favoritesScreenUiState.favoriteItems.isEmpty()) {
-        NoItems()
-    } else {
-        FavoriteItemsList(uiState = favoritesScreenUiState)
+
+    Column(
+    ) {
+        when(favoritesScreenUiState){
+            FavoritesScreenUiState.IsEmpty -> NoItems()
+            is FavoritesScreenUiState.Content -> FavoriteItemsList(items = favoritesScreenUiState.favItemsList)
+        }
     }
+
+
 }
 
 @Composable
@@ -96,10 +100,10 @@ private fun FavoriteItemCard(
 
 @Composable
 private fun FavoriteItemsList(
-    uiState: FavoritesScreenUiState,
+    items: List<FavoriteItem>,
 ) {
     LazyColumn {
-        items(items = uiState.favoriteItems) { item ->
+        items(items = items) { item ->
             Row {
                 FavoriteItemCard(
                     item = item, modifier = Modifier.padding(8.dp),

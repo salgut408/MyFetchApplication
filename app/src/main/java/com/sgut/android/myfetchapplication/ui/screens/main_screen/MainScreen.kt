@@ -2,7 +2,6 @@ package com.sgut.android.myfetchapplication.ui.screens.main_screen
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
-import java.util.*
 import com.sgut.android.myfetchapplication.R.string as AppText
 
 
@@ -31,7 +29,7 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
 ) {
-    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsState(initial = MainScreenUiState())
+    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsState(initial = MainScreenUiState.Loading)
 
     MainScreenContent(
         modifier = Modifier,
@@ -52,15 +50,12 @@ private fun MainScreenContent(
         modifier = modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       if(uiState.isLoading){
-           Text(text = stringResource(id = AppText.loading), style = MaterialTheme.typography.body1)
-       } else {
-           ItemsList(
-               uiState = uiState,
-               onRemoveClick = onRemoveClick,
-               onAddClick = onAddClick
-           )
-       }
+        when(uiState){
+            MainScreenUiState.Loading -> Text(text = stringResource(id = AppText.loading), style = MaterialTheme.typography.body1)
+            is MainScreenUiState.Content -> ItemsList(items = uiState.itemsList,
+                onRemoveClick = onRemoveClick,
+                onAddClick = onAddClick)
+        }
     }
 }
 
@@ -123,13 +118,13 @@ private fun ItemCard(
 
 @Composable
 private fun ItemsList(
-    uiState: MainScreenUiState,
+    items: List<ItemDomainModel>,
     onRemoveClick: (ItemDomainModel) -> Unit,
     onAddClick: (ItemDomainModel) -> Unit,
     ) {
     LazyColumn {
         items(
-            items = uiState.currentItems,
+            items = items,
           // add key to limit recompositions
         ) { item ->
             Row {
