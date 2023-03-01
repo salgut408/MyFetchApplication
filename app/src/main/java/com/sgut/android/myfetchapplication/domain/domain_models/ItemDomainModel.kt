@@ -13,7 +13,7 @@ data class ItemDomainModel(
     val name: String? = null,
 )
 
-fun ItemDomainModel.asItemFavoritesDomainModel(): FavoriteItem {
+fun ItemDomainModel.asFavoriteItem(): FavoriteItem {
     return FavoriteItem(
         id = id,
         listId = listId,

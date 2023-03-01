@@ -7,7 +7,7 @@ import com.sgut.android.myfetchapplication.data.db.ItemDatabase
 import com.sgut.android.myfetchapplication.data.remote.api.FetchApi
 import com.sgut.android.myfetchapplication.domain.ItemsRepository
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
-import com.sgut.android.myfetchapplication.domain.domain_models.asItemFavoritesDomainModel
+import com.sgut.android.myfetchapplication.domain.domain_models.asFavoriteItem
 import com.sgut.android.myfetchapplication.domain.domain_models.dto_mappers.NetworkItemDtoMapperImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -44,11 +44,11 @@ class ItemRepositoryImpl @Inject constructor(
     //repository is central place for all data changes so this is where extension f(x)'s called
 
     override  suspend fun saveFavoriteItem(item: ItemDomainModel){
-        itemDatabase.getDao().insertFavoriteItem(item.asItemFavoritesDomainModel())
+        itemDatabase.getDao().insertFavoriteItem(item.asFavoriteItem())
     }
 
     override suspend fun deleteFavorteItem(item: ItemDomainModel) {
-        itemDatabase.getDao().delete(item.asItemFavoritesDomainModel())
+        itemDatabase.getDao().delete(item.asFavoriteItem())
     }
 
 
