@@ -27,7 +27,7 @@ The ItemRepository class is responsible for handling the data fetching of data, 
 ### Sorting and filter
 Different strategies were thought about being used for sorting and filtering the information displayed within the app...
 
--__ViewModel__ using flows the `ItemDao` returns a UNSORTED list of Items with the function `getAllInfoFromDb`, this function is then called in the `ItemRepository` function `getAllInfoFromRepository` the list is finally sorted by the `MainScreenViewModel using the helper class `ItemComparator` on a flow of data from the repository. This follows the thought that all ui data that will be displayed by the ui will be managed by the ViewModel and uses Flows advantages of have the viewModel operate as an intermediary between the data stream producing `ItemRepository` before consumption by the UI.
+-__ViewModel__ using flows the `ItemDao` returns a UNSORTED list of Items with the function `getAllInfoFromDb`, this function is then called in the `ItemRepository` function `getAllInfoFromRepository` the list is finally sorted by the `MainScreenViewModel` using the helper class `ItemComparator` on a flow of data from the repository. This follows the thought that all ui data that will be displayed by the ui will be managed by the ViewModel and uses Flows advantages of have the viewModel operate as an intermediary between the data stream producing `ItemRepository` before consumption by the UI.
 
 -__Database__ the `ItemDao` would return a sorted list with the suspend function `getSortedListExNullsExBlanksFromRepository` this uses a query to sort and filter out items in the list...this way was not used to preserve data integrity coming from the data layer.
   
