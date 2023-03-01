@@ -1,5 +1,6 @@
 package com.sgut.android.myfetchapplication.ui.screens.favorites_screen
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,40 +26,45 @@ import com.sgut.android.myfetchapplication.R.string as AppText
 fun FavoritesScreen(
     favoritesScreenViewModel: FavoritesScreenViewModel = hiltViewModel(),
 ) {
-    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(FavoritesScreenUiState.IsEmpty)
+    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(initial = FavoritesScreenUiState.NoItems)
 
-   FavoritesContent(favoritesScreenUiState = favoritesScreenUiState)
+   FavoritesContent(
+       modifier = Modifier,
+       favoritesScreenUiState = favoritesScreenUiState,
+   )
 }
 
 @Composable
-private fun FavoritesContent(favoritesScreenUiState: FavoritesScreenUiState) {
-
+private fun FavoritesContent(
+    modifier: Modifier,
+    favoritesScreenUiState: FavoritesScreenUiState
+) {
     Column(
+        modifier = modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Log.d("FAVSCREEN WHEN", favoritesScreenUiState.toString())
         when(favoritesScreenUiState){
-            FavoritesScreenUiState.IsEmpty -> NoItems()
+            FavoritesScreenUiState.NoItems -> NoItems()
+
             is FavoritesScreenUiState.Content -> FavoriteItemsList(items = favoritesScreenUiState.favItemsList)
         }
     }
+
 
 
 }
 
 @Composable
 private fun NoItems(
-    modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+
         Text(
             text = stringResource(AppText.no_favorites),
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold
         )
-    }
+
 }
 
 @Composable

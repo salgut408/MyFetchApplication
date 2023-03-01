@@ -39,7 +39,7 @@ class MainScreenViewModel @Inject constructor(
                 _mainScreenUiState.emit(MainScreenUiState.Content(allItems.sortedWith(ItemComparator).filter { it.name?.isNotEmpty() ?: false }))
             }
         } catch (e: Exception){
-            Log.e("Error", e.message.toString())
+            Log.e("Error-Main viewModel", e.message.toString())
         }
 
     }
