@@ -15,16 +15,16 @@
 ### Features
 This app shows a sorted list of items retrieved from an API using Retrofit. You are able to add an item to your favorites list and view a list of all items you have saved by tapping the "favorites" icon in the bottom toolbar.
 
-Each UI 'screen' has its own ViewModel, and exposes a single StateFlow containing the state for the screen. 
+Each UI 'screen' has its own ViewModel, and exposes a  SharedFlow containing the state for the screen. 
 
-A ViewModel is implemented as `MainScreenViewModel`, exposing a `StateFlow<MainScreenUiState>` for the UI to observe and react to. 
+A ViewModel is implemented as `MainScreenViewModel`, exposing a `SharedFlow<MainScreenUiState>` for the UI to observe and react to. 
 `MainScreenUiState` contains the view state data for the screen as a data class consisting of a list...
 The UI uses `MainScreenViewModel`, and take the `MainScreenViewState` as State, using `collectAsStateWithLifecycle()`
 
 The ItemRepository class is responsible for handling the data fetching of all information, as well as a centralized place for all data model changes*
 
 ### Sorting and filter
-Different strategies were though about being usedused for sorting and filtering the information displayed within the app...
+Different strategies were thought about being used for sorting and filtering the information displayed within the app...
 
 -__ViewModel__ using flows the `ItemDao` returns a UNSORTED list of Items with the function `getAllInfoFromDb`, this function is then called in the `ItemRepository` function `getAllInfoFromRepository` the list is finally sorted by the `MainScreenViewModel using the helper class `ItemComparator` on a flow of data from the repository. This follows the thought that all ui data that will be displayed by the ui will be managed by the ViewModel and uses Flows advantages of have the viewModel operate as an intermediary between the data stream producing `ItemRepository` before consumption by the UI.
 
