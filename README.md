@@ -33,7 +33,7 @@ Different strategies were thought about being used for sorting and filtering the
 
 ### Saved state across configuration changes
 - ViewModels are used to save state across any configuration changes.
-- Certain composable states are saved across configurations changes using `rememberSaveable` in the `SaveItemButton`
+- Certain composable states are saved across configurations changes using `rememberSaveable` in the `SaveItemButton` `rememberSaveable` will save the value in a bundle...
 
 ### Navigation
 Single activity app, `MainActivity` contains `MyFetchApp()` composable which acts as the entrypoint to the app. 
