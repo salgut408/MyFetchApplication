@@ -41,9 +41,7 @@ class MainScreenViewModel @Inject constructor(
         } catch (e: Exception){
             Log.e("Error-Main viewModel", e.message.toString())
         }
-
     }
-
 
 // this makes initial api call
     private fun callInfoForDB() = viewModelScope.launch {
