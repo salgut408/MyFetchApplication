@@ -1,6 +1,5 @@
 package com.sgut.android.myfetchapplication.ui.screens.favorites_screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,53 +17,50 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sgut.android.myfetchapplication.data.db.FavoriteItem
 import com.sgut.android.myfetchapplication.R.string as AppText
 
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun FavoritesScreen(
     favoritesScreenViewModel: FavoritesScreenViewModel = hiltViewModel(),
 ) {
-    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsState(initial = FavoritesScreenUiState.NoItems)
+    val favoritesScreenUiState by favoritesScreenViewModel.favoritesScreenUiState.collectAsStateWithLifecycle(
+        initialValue = FavoritesScreenUiState.NoItems)
 
-   FavoritesContent(
-       modifier = Modifier,
-       favoritesScreenUiState = favoritesScreenUiState,
-   )
+    FavoritesContent(
+        modifier = Modifier,
+        favoritesScreenUiState = favoritesScreenUiState,
+    )
 }
 
 @Composable
 private fun FavoritesContent(
     modifier: Modifier,
-    favoritesScreenUiState: FavoritesScreenUiState
+    favoritesScreenUiState: FavoritesScreenUiState,
 ) {
     Column(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier.padding(16.dp).fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Log.d("FAVSCREEN WHEN", favoritesScreenUiState.toString())
-        when(favoritesScreenUiState){
+        when (favoritesScreenUiState) {
             FavoritesScreenUiState.NoItems -> NoItems()
-
             is FavoritesScreenUiState.Content -> FavoriteItemsList(items = favoritesScreenUiState.favItemsList)
         }
     }
-
-
-
 }
 
 @Composable
 private fun NoItems(
 ) {
-
-        Text(
-            text = stringResource(AppText.no_favorites),
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
-        )
-
+    Text(
+        text = stringResource(AppText.no_favorites),
+        fontSize = 30.sp,
+        fontWeight = FontWeight.Bold
+    )
 }
 
 @Composable

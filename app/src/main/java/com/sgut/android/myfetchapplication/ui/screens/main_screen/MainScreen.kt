@@ -21,15 +21,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.R.string as AppText
 
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
 ) {
-    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsState(initial = MainScreenUiState.Loading)
+    val mainScreenUiState by mainScreenViewModel.mainScreenUiState.collectAsStateWithLifecycle(initialValue = MainScreenUiState.Loading)
 
     MainScreenContent(
         modifier = Modifier,
@@ -51,14 +54,21 @@ private fun MainScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         when(uiState){
-            MainScreenUiState.Loading -> Text(text = stringResource(id = AppText.loading), style = MaterialTheme.typography.body1)
+            MainScreenUiState.Loading -> Loading()
             is MainScreenUiState.Content -> ItemsList(items = uiState.itemsList,
                 onRemoveClick = onRemoveClick,
                 onAddClick = onAddClick)
         }
     }
 }
-
+@Composable
+private fun Loading(
+) {
+    Text(
+        text = stringResource(AppText.loading),
+        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+    )
+}
 
 @Composable
 private fun ItemCard(
