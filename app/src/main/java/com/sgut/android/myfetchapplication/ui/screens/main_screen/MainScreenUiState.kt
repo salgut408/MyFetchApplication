@@ -6,5 +6,5 @@ import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 
 sealed interface MainScreenUiState {
     object Loading: MainScreenUiState
-    data class Content(val itemsList: List<ItemDomainModel>): MainScreenUiState
+    data class Content(var itemsList: List<ItemDomainModel>): MainScreenUiState
 }

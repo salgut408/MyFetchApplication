@@ -39,12 +39,13 @@ class ItemRepositoryImpl @Inject constructor(
     }
 
     //calls for all items to populate database no sorting
+    //Dao inserts whole LIST at once
     override suspend fun getInfoForDatabaseNoSort() {
         withContext(Dispatchers.IO) {
             try {
                 val items = api.getFetchInformation().body()
                     ?.let { networkItemDtoMapperImpl.toDomainList(it) }
-                items?.map{ dao.update(it) }
+                    items?.let { dao.insertAll(it) }
             } catch (err: Exception) {
                 Log.e("Repository", "Failed, ${err.message.toString()}")
             }

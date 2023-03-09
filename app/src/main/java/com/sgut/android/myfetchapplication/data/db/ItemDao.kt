@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(item: ItemDomainModel): Long
+    suspend fun insertAll(itemList: List<ItemDomainModel>): List<Long>
 
     //this returns unsorted list from db
     @Query("SELECT * FROM item_table")
@@ -18,6 +19,9 @@ interface ItemDao {
 
     @Query("SELECT * FROM favorite_item_table")
      fun getAllFavoriteItems(): Flow<List<FavoriteItem>>
+
+    @Query("SELECT * FROM item_table WHERE NULLIF(name, '') IS NOT NULL ORDER BY listId ASC ")
+     fun getInfoFromDbSortByListIdExNullsExBlanks(): Flow<List<ItemDomainModel>>
 
     @Delete
     suspend fun delete(item: FavoriteItem)

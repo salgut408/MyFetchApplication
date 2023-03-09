@@ -60,7 +60,7 @@ private fun MainScreenContent(
     ) {
         when (uiState) {
             MainScreenUiState.Loading -> Loading()
-            is MainScreenUiState.Content -> ItemsList(items = uiState.itemsList,
+            is MainScreenUiState.Content -> ItemsList(items =  uiState.itemsList,
                 onRemoveClick = onRemoveClick,
                 onAddClick = onAddClick)
         }

@@ -6,8 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.sgut.android.myfetchapplication.data.repository.ItemRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +17,7 @@ class FavoritesScreenViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _favoritesScreenUiState = MutableStateFlow<FavoritesScreenUiState>(FavoritesScreenUiState.NoItems)
-    val favoritesScreenUiState: SharedFlow<FavoritesScreenUiState> = _favoritesScreenUiState.asSharedFlow()
+    val favoritesScreenUiState: StateFlow<FavoritesScreenUiState> = _favoritesScreenUiState
 
     init {
         showFavoriteItems()
@@ -27,7 +26,6 @@ class FavoritesScreenViewModel @Inject constructor(
     private fun showFavoriteItems() = viewModelScope.launch {
         try {
             itemsRepository.getFavorites().collect { itemsList ->
-                // empty list always shown tho
                 if(itemsList.isEmpty()) {
                     _favoritesScreenUiState.emit(FavoritesScreenUiState.NoItems)
                 } else {

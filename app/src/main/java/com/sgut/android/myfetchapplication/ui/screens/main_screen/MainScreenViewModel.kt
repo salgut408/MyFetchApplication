@@ -7,7 +7,8 @@ import com.sgut.android.myfetchapplication.data.repository.ItemRepositoryImpl
 import com.sgut.android.myfetchapplication.domain.domain_models.ItemDomainModel
 import com.sgut.android.myfetchapplication.utils.ItemComparator
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +17,9 @@ class MainScreenViewModel @Inject constructor(
     private val itemsRepository: ItemRepositoryImpl,
 ): ViewModel(){
 
+    // i dont think i needed to make this sharedFlow
     private val _mainScreenUiState = MutableStateFlow<MainScreenUiState>(MainScreenUiState.Loading)
-    val mainScreenUiState: SharedFlow<MainScreenUiState> = _mainScreenUiState.asSharedFlow()
+    val mainScreenUiState: StateFlow<MainScreenUiState> = _mainScreenUiState
 
     init {
         callInfoForDB()
@@ -36,7 +38,7 @@ class MainScreenViewModel @Inject constructor(
     private fun showAllItemsSortAndFilteredInVm() = viewModelScope.launch {
         try {
             itemsRepository.getAllInfoFromRepository().collect { allItems ->
-                _mainScreenUiState.emit(MainScreenUiState.Content(allItems.sortedWith(ItemComparator).filter { it.name?.isNotEmpty() ?: false }))
+                _mainScreenUiState.emit(MainScreenUiState.Content(allItems.sortedWith(ItemComparator).filter { it.name?.isNotBlank() ?: false }))
             }
         } catch (e: Exception){
             Log.e("Error-Main viewModel", e.message.toString())
@@ -48,3 +50,5 @@ class MainScreenViewModel @Inject constructor(
         itemsRepository.getInfoForDatabaseNoSort()
     }
 }
+
+
