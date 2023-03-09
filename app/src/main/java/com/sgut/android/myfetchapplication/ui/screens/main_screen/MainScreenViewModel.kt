@@ -17,7 +17,6 @@ class MainScreenViewModel @Inject constructor(
     private val itemsRepository: ItemRepositoryImpl,
 ): ViewModel(){
 
-    // i dont think i needed to make this sharedFlow
     private val _mainScreenUiState = MutableStateFlow<MainScreenUiState>(MainScreenUiState.Loading)
     val mainScreenUiState: StateFlow<MainScreenUiState> = _mainScreenUiState
 
