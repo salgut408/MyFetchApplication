@@ -18,7 +18,7 @@ This app shows a sorted list of items retrieved from an API using Retrofit. You 
 Each UI 'screen' has its own ViewModel, and exposes a  SharedFlow containing the state for the screen. 
 
 ### MVVM
-A ViewModel is implemented as `MainScreenViewModel`, exposing a `SharedFlow<MainScreenUiState>` for the UI to observe and react to. 
+A ViewModel is implemented as `MainScreenViewModel`, exposing a `StateFlow<MainScreenUiState>` for the UI to observe and react to. 
 `MainScreenUiState` contains the view state data for the screen as a data class consisting of a sealed interface containing the "Content" (a list of items) and a loading state...
 The UI uses `MainScreenViewModel`, and takes the `MainScreenViewState` as State, using `collectAsStateWithLifecycle()` so that it collects in a way that is aware of the UI's lifecycle. Using MVVM allows work to be done on one layer  without distrubing  other layers
 
